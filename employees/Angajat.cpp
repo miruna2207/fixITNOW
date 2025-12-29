@@ -1,9 +1,7 @@
 #include "Angajat.h"
 using namespace std;
 int Angajat::nextid = 1;
-void verify_name(const string sir);
-bool verify_cifra_control(string CNP);
-int get_varsta(const string cod);
+
 
 Angajat::Angajat() : id(nextid)
 {
@@ -54,12 +52,11 @@ void Angajat::change_name(const string buff)
     nume = buff;
 };
 
-bool Angajat::isCNPValid() const
+void verify_CNP(string CNP) 
 {
     if (CNP.length() != 13)
     {
         throw std::invalid_argument("CNP n-are marime potrivita\n");
-        return false;
     }
 
     for (int i = 0; i < 13; i++)
@@ -73,23 +70,20 @@ bool Angajat::isCNPValid() const
     if (CNP[0] == '0' || CNP[0] == '3' || CNP[0] == '4' || CNP[0] == '9')
     {
         throw std::invalid_argument("cnp nu incepe cu cifra buna\n");
-        return false;
     }
 
     if (get_varsta(CNP) < 16)
     {
         throw std::out_of_range("varsta angajat <16\n");
-        return false;
     }
 
     int cod_judet = (CNP[7] - '0') * 10 + (CNP[8] - '0');
     if (cod_judet > 52 && cod_judet != 70)
     {
         throw(std::invalid_argument("CNP ul " + CNP + " este invalid(cod judet invalid)\n"));
-        return false;
     }
 
-    return verify_cifra_control(CNP);
+    verify_cifra_control(CNP);
 };
 
 int get_varsta(const string cod)
@@ -135,19 +129,16 @@ int get_varsta(const string cod)
     return anul_curent - an_nastere;
 }
 
-bool verify_cifra_control(string CNP)
+void verify_cifra_control(string CNP)
 {
     int c = CNP[12] - '0';
     // 279146358279
     int s = (CNP[0] - '0') * 2 + (CNP[1] - '0') * 7 + (CNP[2] - '0') * 9 + (CNP[3] - '0') * 1 + (CNP[4] - '0') * 4 + (CNP[5] - '0') * 6 +
             (CNP[6] - '0') * 3 + (CNP[7] - '0') * 5 + (CNP[8] - '0') * 8 + (CNP[9] - '0') * 2 + (CNP[10] - '0') * 7 + (CNP[11] - '0') * 9;
     s = s % 11;
-    if ((s < 10 && c == s) || (s == 10 && c == 1))
-    {
-        return true;
-    }
-    throw(std::invalid_argument("CNP invalid,cifra control invalida\n"));
-    return false;
+    if (!((s < 10 && c == s) || (s == 10 && c == 1)))
+        throw(std::invalid_argument("CNP invalid,cifra control invalida\n"));
+       
 }
 
 void verify_name(const string sir)
@@ -182,9 +173,30 @@ bool verify_data_angajare(const string data_angajare)
 }
 
 void Angajat::verify_angajat() const
+
 {
     verify_name(nume);
     verify_name(prenume);
-    isCNPValid();
+    verify_CNP(CNP);
     verify_data_angajare(data_angajare);
 };
+  
+    void Angajat::afiseaza() const{
+        cout<<"nume:"<<nume<<" prenume:"<<prenume<<endl;
+        cout<<"cnp:"<<CNP<<endl;
+        cout<<"data angajare:"<<data_angajare<<endl;
+        cout<<"oras domiciliu:"<<oras_domiciliu<<endl;
+    
+    };
+
+    string Angajat::get_CNP() const{
+        return CNP;
+    };
+
+    string Angajat::get_nume() const{
+        return nume;
+    }
+
+    string Angajat::get_prenume() const{
+        return prenume;
+    }

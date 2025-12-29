@@ -11,7 +11,11 @@ protected:
 public:
     Receptioner() = default;
 
+    Receptioner(const string,const string,const string,const string,const string);
+
     void inregistreazaCerere(int id) ;
 
     double get_Salariu() override ;
+
+    void afiseaza() const override;
 };

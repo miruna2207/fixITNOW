@@ -15,9 +15,10 @@ protected:
 
 public:
     Tehnician() = default;
-
+    Tehnician(const string,const string,const string,const string,const string, vector<Competenta>);
     void addSpecializari(string tip, string marca) ;
     bool CanRepair(string tip, string marca) const ;
     double get_Salariu() override ;
     void updateReparatii(double valoare);
+    void afiseaza() const override;
 };

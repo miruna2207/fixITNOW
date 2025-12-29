@@ -31,4 +31,17 @@ bool Tehnician::CanRepair(string tip, string marca) const {
 void Tehnician::updateReparatii(double valoare) {
     valoare_reparatii += valoare;
     }
+
+    Tehnician::Tehnician(const string n,const string p,const string c,const string d,const string o,vector<Competenta> co)
+    :Angajat(n,p,c,d,o),specializari(co){
+
+};
+
+ void Tehnician::afiseaza() const {
+    Angajat::afiseaza();
+    for( auto i = specializari.begin();i != specializari.end();i++){
+        cout<<"tip="<<i->tip<<" marca="<<i->marca<<endl;
+    }
+ };
+
     
