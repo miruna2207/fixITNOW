@@ -78,12 +78,12 @@ void GestiuneAngajati::incarcaDinFisier(const string& numeFisier) {
         string tip, nume, prenume, cnp, data, oras, temp;
 
         try {
-            if (!getline(ss, tip, ',')) throw runtime_error("Lipseste tipul");
-            if (!getline(ss, nume, ',')) throw runtime_error("Lipseste numele");
-            if (!getline(ss, prenume, ',')) throw runtime_error("Lipseste prenumele");
-            if (!getline(ss, cnp, ',')) throw runtime_error("Lipseste CNP");
-            if (!getline(ss, data, ',')) throw runtime_error("Lipseste data");
-            if (!getline(ss, oras, ',')) throw runtime_error("Lipseste orasul");
+            if (!getline(ss, tip, ',')) throw invalid_argument("Lipseste tipul");
+            if (!getline(ss, nume, ',')) throw invalid_argument("Lipseste numele");
+            if (!getline(ss, prenume, ',')) throw invalid_argument("Lipseste prenumele");
+            if (!getline(ss, cnp, ',')) throw invalid_argument("Lipseste CNP");
+            if (!getline(ss, data, ',')) throw invalid_argument("Lipseste data");
+            if (!getline(ss, oras, ',')) throw invalid_argument("Lipseste orasul");
 
             auto trim = [](string& s) {
                 s.erase(0, s.find_first_not_of(" "));
@@ -121,12 +121,12 @@ void GestiuneAngajati::incarcaDinFisier(const string& numeFisier) {
             }
 
         } catch (const exception& e) {
-            // Aici prindem erorile si afisam mesajul cerut fara sa oprim programul
             cerr << "Eroare la citire: Angajat invalid pe linia " << nrLinie 
                  << ", cauza: " << e.what() << endl;
         }
     }
     f.close();
+    cout<<" Lista de angajati a fost incarcata cu succes!";
 }
 
 void GestiuneAngajati::afisareToti() const

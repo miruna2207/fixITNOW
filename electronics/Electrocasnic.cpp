@@ -19,8 +19,8 @@ double Electrocasnic::get_pret_catalog() const{
     return pret_catalog;
 }
 
-void Electrocasnic::afisare(ostream& dev){
-    dev<<"marca:"<<marca<<endl;
-    dev<<"model:"<<model<<endl;
-    dev<<"an:"<<an_fabricatie<<" pret_catalog:"<<pret_catalog<<endl;
+void Electrocasnic::afiseaza() const{
+    cout<<"marca:"<<marca;
+    cout<<" model:"<<model;
+    cout<<" an:"<<an_fabricatie<<" pret_catalog:"<<pret_catalog;
 };

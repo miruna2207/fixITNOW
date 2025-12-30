@@ -3,7 +3,9 @@
 class Laptop:public Electrocasnic{
     int RAM;
     public:
-        string get_tip() const override{
-            return "laptop";
-        }
+        Laptop() = default;
+        Laptop(const string ma,const string mo, int an, double p,int r);
+        string get_tip() const override;
+        void afiseaza() const override;
+
 };
