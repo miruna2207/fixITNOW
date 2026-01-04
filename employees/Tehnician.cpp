@@ -44,4 +44,24 @@ void Tehnician::updateReparatii(double valoare) {
     }
  };
 
-    
+void Tehnician::addCerere( const CerereReparatie& cr){
+    nr_cereri_active++;
+    valoare_reparatii+= cr.get_pret_reparatie();
+    nr_cereri_total++;
+};
+
+ void Tehnician::finishCerere(){
+    nr_cereri_active--;
+ };
+
+ int Tehnician::get_nr_cereri_active() const{
+    return nr_cereri_active;
+ };
+
+ int Tehnician::get_nr_cereri_total() const{
+    return nr_cereri_total;
+ };
+
+ string Tehnician::get_tip() const{
+    return "Tehnician";
+ }

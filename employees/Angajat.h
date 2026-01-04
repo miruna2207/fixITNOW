@@ -28,6 +28,7 @@ public:
     string get_CNP() const;
     string get_nume() const;
     string get_prenume() const;
+    virtual string get_tip() const = 0;
 };
 
 

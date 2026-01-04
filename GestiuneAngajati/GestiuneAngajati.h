@@ -12,6 +12,7 @@ private:
     vector<unique_ptr<Angajat>> lista;
 
 public:
+    const vector<unique_ptr<Angajat>>& get_lista_angajati() const override;
     void adaugaAngajat() override; 
     void incarcaDinFisier(const string& numeFisier) override;
     void afisareToti() const override;

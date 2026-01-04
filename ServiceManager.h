@@ -1,12 +1,19 @@
 #pragma once
+#include <queue>
+#include <vector>
+#include <memory>
+#include "electronics/cerereReparatie.h"
 #include "GestiuneElectrocasnice/GestiuneElectrocasnice.h"
-#include "GestiuneAngajati/GestiuneAngajati.h"
-#include<memory>
-
 class ServiceManager {
 private:
     unique_ptr<IGestiuneAngajati> ordinAngajati;
     unique_ptr<IGestiuneElectrocasnice> ordinElectrocasnice;
+    
+    vector<unique_ptr<CerereReparatie>> cereri_active;
+    queue<unique_ptr<CerereReparatie>> coada_asteptare;
+    vector<unique_ptr<CerereReparatie>> cereri_finalizate;
+    vector<unique_ptr<CerereReparatie>> cereri_respinse;
+
     ServiceManager() {
         ordinAngajati = make_unique<GestiuneAngajati>();
         ordinElectrocasnice = make_unique<GestiuneElectrocasnice>();
@@ -18,9 +25,15 @@ public:
         return instance;
     }
 
-    IGestiuneAngajati& angajati() { return *ordinAngajati; }
+     IGestiuneAngajati& angajati() { return *ordinAngajati; }
+    IGestiuneElectrocasnice& electrocasnice() { return *ordinElectrocasnice;};
+    
+    void proceseazaCerereNoua(CerereReparatie& cr);
+    void updateSimulare(int TIC); 
 
     
-    IGestiuneElectrocasnice& electrocasnice() { return *ordinElectrocasnice;};
+    const vector<unique_ptr<CerereReparatie>>& getFinalizate() { return cereri_finalizate; }
+    
 };
 
+Tehnician* CelMaiBunTehnician(string tipCautat,string marcaCautata,vector<unique_ptr<Angajat>>& lista_angajati);

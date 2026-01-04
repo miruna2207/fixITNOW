@@ -1,6 +1,7 @@
 #pragma once
 #include "Angajat.h"
-#include<vector>
+#include "../electronics/cerereReparatie.h"
+#include "../ServiceManager.h"
 class Receptioner:public Angajat{
 
 protected:
@@ -13,9 +14,13 @@ public:
 
     Receptioner(const string,const string,const string,const string,const string);
 
-    void inregistreazaCerere(int id) ;
+    void Receptioner::inregistreazaCerere(CerereReparatie& cr);
 
     double get_Salariu() override ;
 
     void afiseaza() const override;
+
+    string get_tip() const override;
+
 };
+

@@ -1,9 +1,8 @@
 #include "Receptioner.h"
-void Receptioner::inregistreazaCerere(int id) {
-        if(is_id_cerere(id))
-            throw std::invalid_argument("Id-ul e deja inregistrat, id:"+id);
-        id_cereri_gestionate.push_back(id);
-    }
+
+string Receptioner::get_tip() const{
+    return "Receptioner";
+}
 
 bool Receptioner::is_id_cerere(int val){
     for( vector<int>::iterator i = id_cereri_gestionate.begin() ; i != id_cereri_gestionate.end(); i++){
@@ -24,3 +23,13 @@ Receptioner::Receptioner(const string n,const string p,const string c,const stri
 void Receptioner::afiseaza() const{
     Angajat::afiseaza();
 }
+
+
+   void Receptioner::inregistreazaCerere(CerereReparatie& cr) {
+    
+    id_cereri_gestionate.push_back(cr.getID());
+    cr.modifica_depunere_cerere( time(nullptr) );
+    ServiceManager::getInstance().proceseazaCerereNoua(cr);
+}
+
+

@@ -1,5 +1,6 @@
 #pragma once
 #include "Angajat.h"
+#include "../electronics/cerereReparatie.h"
 #include <vector>
 
 struct Competenta {
@@ -11,6 +12,8 @@ class Tehnician : public Angajat {
 protected:
     vector<Competenta> specializari;
     double valoare_reparatii = 0; 
+    int nr_cereri_active = 0;
+    int nr_cereri_total = 0;
     bool is_there_competenta(const string t,const string m) const;
 
 public:
@@ -19,6 +22,11 @@ public:
     void addSpecializari(string tip, string marca) ;
     bool CanRepair(string tip, string marca) const ;
     double get_Salariu() override ;
+    int get_nr_cereri_active() const;
+    int get_nr_cereri_total() const;
+    string get_tip() const override;
     void updateReparatii(double valoare);
     void afiseaza() const override;
+    void addCerere(const CerereReparatie& cr);
+    void finishCerere();
 };

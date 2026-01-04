@@ -185,3 +185,7 @@ Angajat* GestiuneAngajati::gasesteDupaCNP(const std::string &cnp) const
         cout<<"Angajat cu CNP-ul respectiv nu a fost gasit, cnp:"<<cnp<<endl;
     }
  };
+
+ const vector<unique_ptr<Angajat>>& GestiuneAngajati::get_lista_angajati() const{
+    return lista;
+ };
