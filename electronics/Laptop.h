@@ -1,3 +1,4 @@
+#pragma once
 #include "Electrocasnic.h"
 
 class Laptop:public Electrocasnic{

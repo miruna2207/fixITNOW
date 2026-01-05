@@ -12,5 +12,5 @@ void Frigider::afiseaza() const{
 }
 
 string  Frigider::get_tip() const{
-        return "frigider";
+        return "Frigider";
     }

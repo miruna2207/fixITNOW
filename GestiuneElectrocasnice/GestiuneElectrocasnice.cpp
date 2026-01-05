@@ -179,19 +179,26 @@ void GestiuneElectrocasnice::adaugaModelManual()
 
 bool GestiuneElectrocasnice::esteModelReparabil(const string &tip, const string &marca, const string &model) const
 {
-    map<string, vector<unique_ptr<Electrocasnic>>>::const_iterator it = catalog.find(tip);
+  
+    string tipCautat = tip;
+    
+    tipCautat.erase(0, tipCautat.find_first_not_of(" \t\r\n"));
+    tipCautat.erase(tipCautat.find_last_not_of(" \t\r\n") + 1);
+
+    auto it = catalog.find(tipCautat);
     if (it == catalog.end())
     {
-        cout << ("Nu exista tipul asta\n");
-        return 0;
+        cout << "DEBUG: Tipul '" << tipCautat << "' nu a fost gasit in map!\n";
+        return false;
     }
-    for (vector<unique_ptr<Electrocasnic>>::const_iterator i = (it->second).begin(); i != (it->second).end(); i++)
+
+    for (const auto& i : it->second)
     {
-        if ((*i)->get_marca() == marca && (*i)->get_model() == model)
-            return 1;
-        
+        if (i->get_marca() == marca && i->get_model() == model)
+            return true;
     }
-    return 0;
+    return false;
+
 };
 
 void GestiuneElectrocasnice::stergeModel(const string& tip,const string& marca, const string& model){

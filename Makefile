@@ -5,10 +5,13 @@ CXXFLAGS = -std=c++17 -Wall -I. -IGestiuneAngajati -IGestiuneElectrocasnice -Iel
 
 # Identificăm automat toate fișierele .cpp din foldere și subfoldere
 SRCS = main.cpp \
+       ServiceManager.cpp\
        $(wildcard employees/*.cpp)\
        $(wildcard GestiuneAngajati/*.cpp) \
        $(wildcard GestiuneElectrocasnice/*.cpp) \
-       $(wildcard electronics/*.cpp)
+       $(wildcard electronics/*.cpp)\
+       $(wildcard GestiuneCereri/*.cpp)
+
 
 # Numele executabilului final
 TARGET = service.exe

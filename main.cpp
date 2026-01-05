@@ -1,56 +1,72 @@
+#include <iostream>
+#include <vector>
+#include <string>
 #include "ServiceManager.h"
 
+using namespace std;
+
 int main() {
-    auto& service = ServiceManager::getInstance();
+    ServiceManager& manager = ServiceManager::getInstance();
+    int optiune;
+    int TIC = 1;
 
-    // // 1. Test Incarcare din Fisier (cu erori controlate)
-    // cout << "--- Incarcare angajati din fisier ---\n";
-    // service.angajati().incarcaDinFisier("angajati.csv");
+    do {
+        cout << "\n======= SERVICE ELECTRONICE - MENU =======" << endl;
+        cout << "1. Incarca cereri (BUNE)" << endl;
+        cout << "2. Incarca cereri (RELE - Test Error Handling)" << endl;
+        cout << "3. Incarca cereri (PARTIALE)" << endl;
+        cout << "4. Adauga cerere MANUAL" << endl;
+        cout << "5. Ruleaza 1 TIC Simulare" << endl;
+        cout << "6. Ruleaza simulare completa" << endl;
+        cout << "7. Incarca angajati (BUNE)" << endl;
+        cout<<" 8. Incarca electrocasnice catalog( BUNE)"<<endl;
+        cout << "0. Iesire" << endl;
+        cout << "Alege optiunea: ";
+        cin >> optiune;
 
-    // // 2. Test Afisare
-    // cout << "\n--- Lista angajati incarcati ---\n";
-    // service.angajati().afisareToti();
+        try {
+            switch (optiune) {
+                case 1:
+                    manager.cereri().incarcaDinFisier("tests/cereri_bune_1.csv");
+                    break;
+                case 2:
+                    manager.cereri().incarcaDinFisier("tests/cereri_rele_1.csv");
+                    break;
+                case 3:
+                    manager.cereri().incarcaDinFisier("tests/cereri_rele_2.csv");
+                    break;
+                case 4:
+                    manager.cereri().adaugaManual();
+                    break;
+                case 5:
+                    cout << "\n--- EXECUTIE TIC " << TIC << " ---" << endl;
+                    manager.updateSimulare(); // Se presupune ca am adaugat TIC ca parametru daca e nevoie
+                    TIC++;
+                    break;
+                case 6:
+                    cout << "Simulare automata pornita..." << endl;
+                    // Bucla care ruleaza pana cand nu mai sunt cereri active sau in coada
+                    // while(...) { manager.updateSimulare(); TIC++; }
+                    break;
+                
+                case 7:
+                    manager.angajati().incarcaDinFisier("tests/angajati.csv");
+                    break;
 
-    // // 3. Test Modificare Nume
-    // cout << "\n--- Test Modificare Nume ---\n";
-    // service.angajati().modificaNume("6051212410041", "Popescu");
-    
-    // // 4. Test Stergere
-    // cout << "\n--- Test Stergere Angajat ---\n";
-    // service.angajati().stergeAngajat("5001010410036");
+                case 8:
+                    manager.electrocasnice().incarcaModeleDinFisier("tests/electrocasnice_bun_1.csv");
+                    break;
+                case 0:
+                    cout << "Iesire program..." << endl;
+                    break;
+                default:
+                    cout << "Optiune invalida!" << endl;
+            }
+        } catch (const exception& e) {
+            cout << "CRITICAL ERROR in Main: " << e.what() << endl;
+        }
 
-    // // 5. Afisare finala
-    // cout << "\n--- Lista finala ---\n";
-    // service.angajati().afisareToti();
-
-    cout << "===== TEST 1: Incarcare Fisier Corect =====" << endl;
-    service.electrocasnice().incarcaModeleDinFisier("tests/electrocasnice_bun_1.csv");
-    service.electrocasnice().afisareCatalog();
-
-    cout << "\n===== TEST 2: Incarcare Fisier cu Erori =====" << endl;
-    service.electrocasnice().incarcaModeleDinFisier("tests/electrocasnice_rau_1.csv");
-
-    cout << "\n===== TEST 3: Verificare Model Reparabil =====" << endl;
-    if (service.electrocasnice().esteModelReparabil("Laptop", "ASUS", "Zenbook")) {
-        cout << "[OK] Laptop ASUS Zenbook este in catalog." << endl;
-    } else {
-        cout << "[EROARE] Laptop ASUS Zenbook nu a fost gasit!" << endl;
-    }
-
-    
-    if (!service.electrocasnice().esteModelReparabil("TV", "Sony", "Bravia")) {
-        cout << "[OK] Sony Bravia a fost respins corect (nu e in catalog)." << endl;
-    }
-
-    cout << "\n===== TEST 4: Adaugare Manuala =====" << endl;
-    // Aici introduci de la tastatura datele: Frigider, Samsung, FamilyHub, 2024, 9000, 1
-    service.electrocasnice().adaugaModelManual();
-    
-    cout << "\n===== TEST 5: Stergere Model =====" << endl;
-    service.electrocasnice().stergeModel("Laptop", "ASUS", "Zenbook");
-    
-    cout << "\n===== CATALOG FINAL =====" << endl;
-    service.electrocasnice().afisareCatalog();
+    } while (optiune != 0);
 
     return 0;
 }

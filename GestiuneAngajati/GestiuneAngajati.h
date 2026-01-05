@@ -1,9 +1,5 @@
 #pragma once
 #include "IGestiuneAngajati.h"
-#include "../employees/Angajat.h"
-#include "../employees/Tehnician.h"   
-#include "../employees/Receptioner.h"
-#include "../employees/Supervizor.h"
 #include <vector>
 #include <memory>
 

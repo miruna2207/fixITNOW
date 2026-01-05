@@ -1,5 +1,5 @@
 #include "Tehnician.h"
- 
+#include "../GestiuneCereri/cerereReparatie.h" 
 bool Tehnician::is_there_competenta(const string t,const string m) const{
     for( auto i = specializari.begin() ; i !=specializari.end(); i++){
         if( (*i).tip == t && (*i).marca == m){
@@ -47,7 +47,7 @@ void Tehnician::updateReparatii(double valoare) {
 void Tehnician::addCerere( const CerereReparatie& cr){
     nr_cereri_active++;
     valoare_reparatii+= cr.get_pret_reparatie();
-    nr_cereri_total++;
+    timp_total+= cr.get_durata_reparatie();
 };
 
  void Tehnician::finishCerere(){
@@ -58,8 +58,8 @@ void Tehnician::addCerere( const CerereReparatie& cr){
     return nr_cereri_active;
  };
 
- int Tehnician::get_nr_cereri_total() const{
-    return nr_cereri_total;
+ int Tehnician::get_timp_total() const{
+    return timp_total;
  };
 
  string Tehnician::get_tip() const{

@@ -1,8 +1,5 @@
+#pragma once
 #include "IGestiuneElectrocasnice.h"
-#include "../electronics/TV.h"
-#include "../electronics/Laptop.h"
-#include "../electronics/Masina_Spalat.h"
-#include "../electronics/Frigider.h"
 #include <vector>
 #include <memory>
 #include<map>

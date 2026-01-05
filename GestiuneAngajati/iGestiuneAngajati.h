@@ -1,5 +1,10 @@
 #pragma once
 #include <string>
+#include <vector>
+#include <memory>
+#include "../employees/Tehnician.h"
+#include "../employees/Receptioner.h"
+#include "../employees/Supervizor.h"
 
 class IGestiuneAngajati {
 public:

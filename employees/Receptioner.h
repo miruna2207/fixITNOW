@@ -1,7 +1,9 @@
 #pragma once
 #include "Angajat.h"
-#include "../electronics/cerereReparatie.h"
-#include "../ServiceManager.h"
+#include <vector>
+#include <memory>
+
+class CerereReparatie;
 class Receptioner:public Angajat{
 
 protected:
@@ -14,7 +16,7 @@ public:
 
     Receptioner(const string,const string,const string,const string,const string);
 
-    void Receptioner::inregistreazaCerere(CerereReparatie& cr);
+    void inregistreazaCerere(std::unique_ptr<CerereReparatie> cr);
 
     double get_Salariu() override ;
 
