@@ -77,3 +77,7 @@ Tehnician* CelMaiBunTehnician(const string tip, const string marca, const vector
     }
     return ales;
 }
+
+bool ServiceManager::cereriInSistem() const {
+    return coada_asteptare.empty() && cereri_active.empty();
+}

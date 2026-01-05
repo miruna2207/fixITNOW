@@ -34,7 +34,7 @@ public:
     void proceseazaCerereNoua(unique_ptr<CerereReparatie> cr);
     void updateSimulare(); 
 
-    
+    bool cereriInSistem() const;
     const vector<unique_ptr<CerereReparatie>>& getFinalizate() { return cereri_finalizate; }
     
 };
