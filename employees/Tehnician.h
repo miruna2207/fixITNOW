@@ -27,7 +27,7 @@ public:
     int get_timp_total() const;
     string get_tip() const override;
     void updateReparatii(double valoare);
-    void afiseaza() const override;
+    void afiseaza(ostream&) const override;
     void addCerere(const CerereReparatie& cr);
     void finishCerere();
 };

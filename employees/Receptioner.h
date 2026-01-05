@@ -20,7 +20,7 @@ public:
 
     double get_Salariu() override ;
 
-    void afiseaza() const override;
+    void afiseaza(ostream&) const override;
 
     string get_tip() const override;
 

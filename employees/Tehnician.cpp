@@ -37,10 +37,10 @@ void Tehnician::updateReparatii(double valoare) {
 
 };
 
- void Tehnician::afiseaza() const {
-    Angajat::afiseaza();
+ void Tehnician::afiseaza(ostream& file) const {
+    Angajat::afiseaza(file);
     for( auto i = specializari.begin();i != specializari.end();i++){
-        cout<<"tip="<<i->tip<<" marca="<<i->marca<<endl;
+        cout<<" "<<i->tip<<" "<<i->marca;
     }
  };
 

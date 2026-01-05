@@ -15,4 +15,5 @@ public:
     void stergeAngajat(const string& cnp) override;
     void modificaNume(const string& cnp, const string& numeNou) override;
     Angajat* gasesteDupaCNP(const std::string& cnp) const;
+    bool echipaCompleta() const override;
 };

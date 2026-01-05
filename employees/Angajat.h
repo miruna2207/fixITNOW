@@ -24,7 +24,7 @@ public:
     void change_name(const string buff);
     virtual ~Angajat() = default;
     double virtual get_Salariu();
-    void virtual afiseaza() const;
+    void virtual afiseaza(ostream&) const;
     string get_CNP() const;
     string get_nume() const;
     string get_prenume() const;

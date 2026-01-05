@@ -1,5 +1,5 @@
 #pragma once
-#include <queue>
+#include <deque>
 #include <vector>
 #include <memory>
 #include "../GestiuneCereri/GestiuneCereri.h"
@@ -11,7 +11,7 @@ private:
     unique_ptr<IGestiuneCereri> ordinCereri;
     
     vector<unique_ptr<CerereReparatie>> cereri_active;
-    queue<unique_ptr<CerereReparatie>> coada_asteptare;
+    deque<unique_ptr<CerereReparatie>> coada_asteptare;
     vector<unique_ptr<CerereReparatie>> cereri_finalizate;
     vector<unique_ptr<CerereReparatie>> cereri_respinse;
 
@@ -33,6 +33,7 @@ public:
     
     void proceseazaCerereNoua(unique_ptr<CerereReparatie> cr);
     void updateSimulare(); 
+    void afiseaza_coada_asteptare() const;
 
     bool cereriInSistem() const;
     const vector<unique_ptr<CerereReparatie>>& getFinalizate() { return cereri_finalizate; }

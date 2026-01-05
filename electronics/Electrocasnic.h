@@ -20,5 +20,5 @@ class Electrocasnic{
     int get_an_fabricatie() const;
     double get_pret_catalog() const;
     virtual string get_tip() const = 0;
-    virtual void afiseaza() const;
+    virtual void afiseaza(ostream&) const;
 };

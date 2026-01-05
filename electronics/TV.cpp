@@ -7,7 +7,7 @@ string TV::get_tip() const{
     return "TV";
 }
 
-void TV::afiseaza() const{
-    Electrocasnic::afiseaza();
-    cout<<" diagonala="<<diag<<" "<<unitate<<endl;
+void TV::afiseaza(ostream& file) const{
+    Electrocasnic::afiseaza(file);
+    cout<<" "<<diag<<" "<<unitate;
 };

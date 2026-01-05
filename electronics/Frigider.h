@@ -6,6 +6,6 @@ class Frigider:public Electrocasnic{
     public:
     Frigider() = default;
     Frigider(const string brand,const string mod,int an,double price,bool c);
-    void afiseaza() const override;
+    void afiseaza(ostream&) const override;
     string  get_tip() const override;
 };

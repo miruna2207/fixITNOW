@@ -159,7 +159,7 @@ void GestiuneElectrocasnice::adaugaModelManual()
             cin >> diag;
             cout << " unitate=";
             cin >> unitate;
-            nou = make_unique<TV>(marca,model,an_productie,pret_catalog,diag,unitate);
+            nou = make_unique<TV>(marca, model, an_productie, pret_catalog, diag, unitate);
         }
         else if (tip == "Frigider")
         {
@@ -179,9 +179,9 @@ void GestiuneElectrocasnice::adaugaModelManual()
 
 bool GestiuneElectrocasnice::esteModelReparabil(const string &tip, const string &marca, const string &model) const
 {
-  
+
     string tipCautat = tip;
-    
+
     tipCautat.erase(0, tipCautat.find_first_not_of(" \t\r\n"));
     tipCautat.erase(tipCautat.find_last_not_of(" \t\r\n") + 1);
 
@@ -192,50 +192,58 @@ bool GestiuneElectrocasnice::esteModelReparabil(const string &tip, const string 
         return false;
     }
 
-    for (const auto& i : it->second)
+    for (const auto &i : it->second)
     {
         if (i->get_marca() == marca && i->get_model() == model)
             return true;
     }
     return false;
-
 };
 
-void GestiuneElectrocasnice::stergeModel(const string& tip,const string& marca, const string& model){
-    try{
-    auto it = catalog.find(tip);
-    if(it == catalog.end())
-        throw invalid_argument("Tipul este necunoscut!"+tip);
+void GestiuneElectrocasnice::stergeModel(const string &tip, const string &marca, const string &model)
+{
+    try
+    {
+        auto it = catalog.find(tip);
+        if (it == catalog.end())
+            throw invalid_argument("Tipul este necunoscut!" + tip);
 
-    bool gasit = 0;
-    for(auto i = (it->second).begin(); i != (it->second).end(); i++){
-        if( (*i)->get_marca() == marca && (*i)->get_model() == model){
-            (it->second).erase(i);
-            gasit = 1;
-            cout<<"Electrocasnicul a fost eliminat cu succes!\n";
-            break;
+        bool gasit = 0;
+        for (auto i = (it->second).begin(); i != (it->second).end(); i++)
+        {
+            if ((*i)->get_marca() == marca && (*i)->get_model() == model)
+            {
+                (it->second).erase(i);
+                gasit = 1;
+                cout << "Electrocasnicul a fost eliminat cu succes!\n";
+                break;
+            }
         }
+        if (!gasit)
+            throw invalid_argument("Nu a fost gasit marca si modelul " + marca + " " + model);
     }
-    if(!gasit)
-        throw invalid_argument("Nu a fost gasit marca si modelul "+marca+" "+model);
-
-    }
-    catch(const exception& e){
-        cout<<"Stergerea a esuat!Motiv:"<<e.what()<<endl;
+    catch (const exception &e)
+    {
+        cout << "Stergerea a esuat!Motiv:" << e.what() << endl;
     }
 };
 
-void GestiuneElectrocasnice::afisareCatalog() const{
-    if(catalog.empty()){
-        cout<<"Catalogul este gol\n";
+void GestiuneElectrocasnice::afisareCatalog() const
+{
+    if (catalog.empty())
+    {
+        cout << "Catalogul este gol\n";
         return;
     }
 
-    for( auto itMap = catalog.begin(); itMap != catalog.end(); itMap++){
+    for (auto itMap = catalog.begin(); itMap != catalog.end(); itMap++)
+    {
         string tip = itMap->first;
-        cout<<"["<<tip<<"]:\n";
-        for(auto i = (itMap->second).begin() ; i != (itMap->second).end(); i++)
-            (*i)->afiseaza();
-        
+        cout << "[" << tip << "]:\n";
+        for (auto i = (itMap->second).begin(); i != (itMap->second).end(); i++)
+        {
+            (*i)->afiseaza(cout);
+            cout << endl;
+        }
     }
 }

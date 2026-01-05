@@ -4,8 +4,8 @@ Supervizor::Supervizor(const string n,const string p,const string c,const string
 
 };
 
-void Supervizor::afiseaza() const{
-    Angajat::afiseaza();
+void Supervizor::afiseaza(ostream& file) const{
+    Angajat::afiseaza(file);
 }
 
  string Supervizor::get_tip() const{

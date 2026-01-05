@@ -8,5 +8,5 @@ class TV: public Electrocasnic{
     TV() = default;
     TV(const string brand,const string mod,int an,double price,double d,string u);
     string get_tip() const override;
-    void afiseaza() const override;
+    void afiseaza(ostream&) const override;
 };

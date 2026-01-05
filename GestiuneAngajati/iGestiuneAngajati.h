@@ -15,4 +15,6 @@ public:
     virtual void afisareToti() const = 0;
     virtual void stergeAngajat(const std::string& cnp) = 0;
     virtual void modificaNume(const std::string& cnp, const std::string& numeNou) = 0;
+    virtual bool echipaCompleta() const = 0;
+    virtual Angajat* gasesteDupaCNP(const std::string& cnp) const = 0;
 };

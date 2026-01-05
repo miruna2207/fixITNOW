@@ -8,5 +8,5 @@ class Masina_Spalat:public Electrocasnic{
 
     Masina_Spalat() = default;
     Masina_Spalat(const string brand,const string mod,int an,double price,int c);
-    void afiseaza() const override;
+    void afiseaza(ostream&) const override;
 };

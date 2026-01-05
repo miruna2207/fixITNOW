@@ -1,7 +1,8 @@
 #include "ServiceManager.h"
 
 void ServiceManager::proceseazaCerereNoua(unique_ptr<CerereReparatie> cr) {
-    if (!cr || cr->get_aparat() == nullptr) return;
+
+    if (!cr || cr->get_aparat() == nullptr || !angajati().echipaCompleta()) return;
 
     string tip = cr->get_aparat()->get_tip();
     string marca = cr->get_aparat()->get_marca();
@@ -20,10 +21,10 @@ void ServiceManager::proceseazaCerereNoua(unique_ptr<CerereReparatie> cr) {
         cr->alocaTehnician(tehnician_alocat);
         tehnician_alocat->addCerere(*cr);
         cout << "[Receptioner] Cererea " << cr->getID() << " asignata lui: " << tehnician_alocat->get_nume() << endl;
-        cereri_active.push_back(std::move(cr)); // Mutam in active
+        cereri_active.push_back(std::move(cr)); 
     } else {
         cout << "[Receptioner] Niciun tehnician disponibil. Cererea " << cr->getID() << " in asteptare.\n";
-        coada_asteptare.push(std::move(cr)); // Mutam in coada
+        coada_asteptare.push_back(std::move(cr)); 
     }
 }
 
@@ -43,7 +44,7 @@ void ServiceManager::updateSimulare() {
                 auto& prima = coada_asteptare.front();
                 if (t_liber->CanRepair(prima->get_aparat()->get_tip(), prima->get_aparat()->get_marca())) {
                     unique_ptr<CerereReparatie> cerereDeAlocat = std::move(coada_asteptare.front());
-                    coada_asteptare.pop();
+                    coada_asteptare.pop_front();
                     
                     cerereDeAlocat->alocaTehnician(t_liber);
                     t_liber->addCerere(*cerereDeAlocat);
@@ -56,6 +57,7 @@ void ServiceManager::updateSimulare() {
              (*it)->getID() <<"timp ramas:"<<(*it)->get_timp_ramas() << endl;
             ++it;
         }
+        afiseaza_coada_asteptare();
     }
 }
 
@@ -81,3 +83,10 @@ Tehnician* CelMaiBunTehnician(const string tip, const string marca, const vector
 bool ServiceManager::cereriInSistem() const {
     return coada_asteptare.empty() && cereri_active.empty();
 }
+
+void ServiceManager::afiseaza_coada_asteptare() const{
+    cout<<"Id Cereri in asteptare : ";
+    for( auto cerere = coada_asteptare.begin(); cerere != coada_asteptare.end(); cerere++ )
+        cout<<(*cerere)->getID()<<" ";
+    cout<<endl;
+};

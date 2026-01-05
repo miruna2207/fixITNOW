@@ -7,6 +7,6 @@ class Laptop:public Electrocasnic{
         Laptop() = default;
         Laptop(const string ma,const string mo, int an, double p,int r);
         string get_tip() const override;
-        void afiseaza() const override;
+        void afiseaza(ostream&) const override;
 
 };
