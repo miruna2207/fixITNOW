@@ -1,9 +1,14 @@
-#include "../ServiceManager.h"
+#pragma once
+#include <vector>
+#include <memory>
+#include "../GestiuneCereri/GestiuneCereri.h"
 
-class iRaport{
-    public:
-    virtual ~iRaport() = default;
-    virtual void top_angajati_salariu() const = 0;
-    virtual void longest_reparatie() const = 0;
-    virtual void ordoneaza_cereri() = 0;
+
+class IGestiuneRaportari {
+public:
+    virtual ~IGestiuneRaportari() = default;
+    
+    virtual void raportAparateRespinse(const vector<unique_ptr<CerereReparatie>>& respinse) = 0;
+
+    virtual void raportTopSalarii(const vector<unique_ptr<Angajat>>& angajati) = 0;
 };

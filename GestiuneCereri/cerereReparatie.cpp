@@ -33,3 +33,5 @@ void CerereReparatie::proceseazaTic() { if(timp_ramas > 0) timp_ramas--; }
 bool CerereReparatie::esteFinalizata() const { return esteProcesata() && timp_ramas <= 0; }
 Electrocasnic* CerereReparatie::get_aparat() const { return aparat.get(); }
 Tehnician* CerereReparatie::get_tehnician_alocat() const { return tehnician_alocat; }
+
+

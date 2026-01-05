@@ -42,4 +42,5 @@ public:
     bool esteProcesata() const;
     Electrocasnic* get_aparat() const;
     Tehnician* get_tehnician_alocat() const;
+    
 };
