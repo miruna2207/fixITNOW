@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <algorithm>
 #include "../electronics/TV.h"
 #include "../electronics/Laptop.h"
 #include "../electronics/Masina_Spalat.h"

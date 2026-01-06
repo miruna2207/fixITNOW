@@ -5,51 +5,70 @@
 #include <fstream>
 
 template <typename T>
-void gasesteCeaMaiLungaReparatie(const T& container, int& best_reparatie, Tehnician*& t) {
-    for (const auto& cerere : container) {
-        if (cerere->get_durata_reparatie() > best_reparatie) {
+void gasesteCeaMaiLungaReparatie(const T &container, int &best_reparatie, Tehnician *&t)
+{
+    for (const auto &cerere : container)
+    {
+        if (cerere->get_durata_reparatie() > best_reparatie)
+        {
             best_reparatie = cerere->get_durata_reparatie();
             t = cerere->get_tehnician_alocat();
         }
     }
 }
 
-void GestiuneRaportari::Cereri_Asteptare_Ordonate(const deque<unique_ptr<CerereReparatie>>& asteptare) {
-    if (asteptare.empty()) return;
+void GestiuneRaportari::Cereri_Asteptare_Ordonate(const deque<unique_ptr<CerereReparatie>> &asteptare)
+{
+    if (asteptare.empty()){
+        cout<<"\n\n coada asteptare este goala \n\n\n";
+        return;
+    }
+        
 
-    map<string, map<string, vector<CerereReparatie*>>> grupate;
+    map<string, map<string, vector<CerereReparatie *>>> grupate;
 
-    for (auto it = asteptare.begin(); it != asteptare.end(); ++it) {
-        CerereReparatie* ptr = it->get();
+    for (auto it = asteptare.begin(); it != asteptare.end(); ++it)
+    {
+        CerereReparatie *ptr = it->get();
         string tip = ptr->get_aparat()->get_tip();
         string marca = ptr->get_aparat()->get_marca();
-        
+
         grupate[tip][marca].push_back(ptr);
     }
 
-    ofstream out("../output/Cereri_Asteptare_ordonate.csv");
-    if( !out){
-        cout <<"fisierul nu poate fi deschis\n";
+    ofstream out("output/Cereri_Asteptare_ordonate.csv");
+    if (!out)
+    {
+        cout << "fisierul nu poate fi deschis\n";
         return;
     }
 
-    for (auto itTip = grupate.begin(); itTip != grupate.end(); ++itTip) {
-        
+    cout<<"\n\n=========Cereri in asteptare=========\n";
+    for (auto itTip = grupate.begin(); itTip != grupate.end(); ++itTip)
+    {
 
-        for (auto itMarca = itTip->second.begin(); itMarca != itTip->second.end(); ++itMarca) {
-    
-            sort(itMarca->second.begin(), itMarca->second.end(), [](CerereReparatie* a, CerereReparatie* b) {
-                return a->get_aparat()->get_model() < b->get_aparat()->get_model();
-            });
+        for (auto itMarca = itTip->second.begin(); itMarca != itTip->second.end(); ++itMarca)
+        {
 
-            // Pasul 3: Afisarea obiectelor folosind functia ta
-            for (auto itCerere = itMarca->second.begin(); itCerere != itMarca->second.end(); ++itCerere) {
-                
-                (*itCerere)->afisare(out); 
+            sort(itMarca->second.begin(), itMarca->second.end(), [](CerereReparatie *a, CerereReparatie *b)
+                 { return a->get_aparat()->get_model() < b->get_aparat()->get_model(); });
+
+            for (auto itCerere = itMarca->second.begin(); itCerere != itMarca->second.end(); ++itCerere)
+            {
+
+                (*itCerere)->afisare(out);
+                (*itCerere)->afisare(cout);
+                cout<<endl;
                 out << "\n";
             }
+
+         
         }
     }
+    cout<<"Fisierul a fost incarcat cu succes!\n";
+    cout<<"\n\n===================\n\n";
+    out.close();
+    
 }
 
 void GestiuneRaportari::raportAparateRespinse(const vector<unique_ptr<CerereReparatie>> &respinse)
@@ -92,7 +111,7 @@ void GestiuneRaportari::raportTopSalariuAngajati(const vector<unique_ptr<Angajat
         return;
     }
 
-    vector<Angajat*> lista;
+    vector<Angajat *> lista;
     for (auto i = lista_angajati.begin(); i != lista_angajati.end(); i++)
     {
         lista.push_back(i->get());
@@ -101,36 +120,63 @@ void GestiuneRaportari::raportTopSalariuAngajati(const vector<unique_ptr<Angajat
     sort(lista.begin(), lista.end(), [](Angajat *a, Angajat *b)
          { return a->get_Salariu() > b->get_Salariu(); });
 
-    ofstream file("../output/Top_3_Angajati_In_Functie_De_Salariu.csv");
-    if(!file){
-        cout<<" fisierul nu poate fi deschis\n";
+    cout << "\n=== TOP 3 ANGAJATI DUPA SALARIU ===\n";
+    int limita = min(3, (int)lista.size());
+    for (int i = 0; i < limita; i++)
+    {
+        lista[i]->afiseaza(cout);
+        cout << " " << lista[i]->get_Salariu() << " RON" << endl;
+    }
+    cout << "==================================\n";
+
+    ofstream file("output/Top_3_Angajati_In_Functie_De_Salariu.csv");
+    if (!file)
+    {
+        cout << "Eroare: fisierul nu poate fi deschis\n";
         return;
     }
 
-    int limita = 3;
-    for(int i = 0; i < limita; i++){
+    for (int i = 0; i < limita; i++)
+    {
         lista[i]->afiseaza(file);
-        file << " " << lista[i]->get_Salariu() << endl;
+        file << " ," << lista[i]->get_Salariu() << " RON" << endl;
     }
     file.close();
-};
+    cout << "Raportul a fost salvat cu succes in fisier!\n ";
+}
 
- void GestiuneRaportari::Angajat_Longest_Reparatie(const vector<unique_ptr<CerereReparatie>>& cereriFinalizate,
-    const vector<unique_ptr<CerereReparatie>>& cereriActive, const deque<unique_ptr<CerereReparatie>>& cereriAsteptare)  {
+void GestiuneRaportari::Angajat_Longest_Reparatie(const vector<unique_ptr<CerereReparatie>> &cereriFinalizate,
+                                                  const vector<unique_ptr<CerereReparatie>> &cereriActive, const deque<unique_ptr<CerereReparatie>> &cereriAsteptare)
+{
+
     int best_reparatie = -1;
-    Tehnician* t =nullptr;
+    Tehnician *t = nullptr;
 
-    gasesteCeaMaiLungaReparatie(cereriFinalizate,best_reparatie,t);
-    gasesteCeaMaiLungaReparatie(cereriAsteptare,best_reparatie,t);
-    gasesteCeaMaiLungaReparatie(cereriActive,best_reparatie,t);
+    gasesteCeaMaiLungaReparatie(cereriFinalizate, best_reparatie, t);
+    gasesteCeaMaiLungaReparatie(cereriAsteptare, best_reparatie, t);
+    gasesteCeaMaiLungaReparatie(cereriActive, best_reparatie, t);
 
-    ofstream file("../output/Tehnician_cu_cea_mai_lunga_reparatie.csv");
-
-    if(!file){
-        cout<<"fisierul nu poate fi deschis ../output/Tehnician_cu_cea_mai_lunga_reparatie.csv\n";
+    if (t == nullptr)
+    {
+        cout << "Nu exista nicio reparatie in sistem.\n";
         return;
     }
-    
+
+    cout << "\n=== TEHNICIAN CU CEA MAI LUNGA REPARATIE ===\n";
+    t->afiseaza(cout);
+    cout << " Salariu: " << t->get_Salariu() << " RON\n";
+    cout << " Durata cea mai lunga reparatie: " << best_reparatie << " TIC-uri\n";
+    cout << "============================================\n";
+
+    ofstream file("output/Tehnician_cu_cea_mai_lunga_reparatie.csv");
+    if (!file)
+    {
+        cout << "Eroare: fisierul nu poate fi deschis\n";
+        return;
+    }
+
     t->afiseaza(file);
-    file<<" "<<t->get_Salariu();
- }
+    file << "," << t->get_Salariu() << "," << best_reparatie;
+    file.close();
+    cout << "Raportul a fost salvat cu succes in fisier!\n";
+}

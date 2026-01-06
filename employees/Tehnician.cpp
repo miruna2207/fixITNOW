@@ -40,7 +40,7 @@ void Tehnician::updateReparatii(double valoare) {
  void Tehnician::afiseaza(ostream& file) const {
     Angajat::afiseaza(file);
     for( auto i = specializari.begin();i != specializari.end();i++){
-        cout<<" "<<i->tip<<" "<<i->marca;
+        file<<" "<<i->tip<<" "<<i->marca;
     }
  };
 

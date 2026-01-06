@@ -38,6 +38,11 @@ Tehnician* CerereReparatie::get_tehnician_alocat() const { return tehnician_aloc
 void CerereReparatie::afisare(ostream& dev){
     dev<<cerereID<<" "<<numeClient<<" "<<complexitate<<" "<<durata_reparatie<<" "<<timp_ramas<<" "
     <<pret_reparatie<<" ";
-    aparat->afiseaza(dev);
+    if( aparat){
+       dev<<aparat->get_tip()<<" ";
+       aparat->afiseaza(dev);}
+    else
+        dev<<" fara aparat asociat";
+
 };
 

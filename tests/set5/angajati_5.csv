@@ -1,0 +1,8 @@
+tehnician,ExpertTV,Ion,5010101400012,01.01.2020,Bucuresti,1,TV,Samsung
+tehnician,ExpertLaptop,Vasile,5020101400013,15.06.2021,Cluj,1,Laptop,Asus
+tehnician,ExpertFrigider,Mihai,5030101400014,10.01.2019,Iasi,1,Frigider,Beko
+tehnician,ExpertMasina,Bogdan,5040101400015,22.03.2018,Brasov,1,Masina_Spalat,Bosch
+tehnician,Universal,Andrei,5050101400016,05.11.2022,Timisoara,4,TV,Samsung,Laptop,Asus,Frigider,Beko,Masina_Spalat,Bosch
+receptioner,Popa,Elena,5060101400022,10.02.2021,Bucuresti
+receptioner,Marin,Anca,5070101400023,01.09.2020,Cluj
+supervizor,Constantin,Paul,5080101400025,01.01.2015,Bucuresti

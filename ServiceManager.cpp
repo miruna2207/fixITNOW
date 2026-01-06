@@ -29,37 +29,62 @@ void ServiceManager::proceseazaCerereNoua(unique_ptr<CerereReparatie> cr) {
 }
 
 void ServiceManager::updateSimulare() {
+    cout << "\n=== UPDATE SIMULARE ===" << endl;
+    
     for (auto it = cereri_active.begin(); it != cereri_active.end(); ) {
         (*it)->proceseazaTic();
 
         if ((*it)->esteFinalizata()) {
             Tehnician* t_liber = (*it)->get_tehnician_alocat();
-            cout << "Tehnicianul " << t_liber->get_nume() << " a terminat ID " << (*it)->getID() << endl;
+            cout << "[TERMINAT] Tehnicianul " << t_liber->get_nume() 
+                 << " a terminat ID " << (*it)->getID() 
+                 << ". Acum are " << t_liber->get_nr_cereri_active() - 1 << " cereri active." << endl;
             
             t_liber->finishCerere();
             cereri_finalizate.push_back(std::move(*it));
             it = cereri_active.erase(it);
 
+        
             if (!coada_asteptare.empty()) {
-                auto& prima = coada_asteptare.front();
-                if (t_liber->CanRepair(prima->get_aparat()->get_tip(), prima->get_aparat()->get_marca())) {
-                    unique_ptr<CerereReparatie> cerereDeAlocat = std::move(coada_asteptare.front());
-                    coada_asteptare.pop_front();
+                cout << "[COADA] " << coada_asteptare.size() << " cereri in asteptare" << endl;
+                
+
+                for (auto it_coada = coada_asteptare.begin(); it_coada != coada_asteptare.end(); ) {
+                    string tip = (*it_coada)->get_aparat()->get_tip();
+                    string marca = (*it_coada)->get_aparat()->get_marca();
                     
-                    cerereDeAlocat->alocaTehnician(t_liber);
-                    t_liber->addCerere(*cerereDeAlocat);
-                    cout << "[SIM] " << t_liber->get_nume() << " a preluat ID " << cerereDeAlocat->getID() << endl;
-                    cereri_active.push_back(std::move(cerereDeAlocat));
+                    Tehnician* tehnician_disponibil = CelMaiBunTehnician(
+                        tip, marca, angajati().get_lista_angajati()
+                    );
+                    
+                    if (tehnician_disponibil != nullptr) {
+                        cout << "[ALOCARE] Tehnician " << tehnician_disponibil->get_nume()
+                             << " poate prelua ID " << (*it_coada)->getID()
+                             << " (" << tip << " " << marca << ")" << endl;
+                        
+                        unique_ptr<CerereReparatie> cerereDeAlocat = std::move(*it_coada);
+                        it_coada = coada_asteptare.erase(it_coada);
+                        
+                        cerereDeAlocat->alocaTehnician(tehnician_disponibil);
+                        tehnician_disponibil->addCerere(*cerereDeAlocat);
+                        cout << "[ALOCAT] " << tehnician_disponibil->get_nume() 
+                             << " a preluat ID " << cerereDeAlocat->getID() << endl;
+                        cereri_active.push_back(std::move(cerereDeAlocat));
+                    } else {
+                        ++it_coada;
+                    }
                 }
             }
         } else {
-            cout << "Tehnician " << (*it)->get_tehnician_alocat()->get_nume() << " lucreaza la ID " <<
-             (*it)->getID() <<"timp ramas:"<<(*it)->get_timp_ramas() << endl;
+            cout << "Tehnician " << (*it)->get_tehnician_alocat()->get_nume() 
+                 << " lucreaza la ID " << (*it)->getID() 
+                 << " timp ramas:" << (*it)->get_timp_ramas() << endl;
             ++it;
         }
-        afiseaza_coada_asteptare();
     }
+    afiseaza_coada_asteptare();
 }
+ 
 
 
 Tehnician* CelMaiBunTehnician(const string tip, const string marca, const vector<unique_ptr<Angajat>>& lista) {
@@ -81,7 +106,9 @@ Tehnician* CelMaiBunTehnician(const string tip, const string marca, const vector
 }
 
 bool ServiceManager::cereriInSistem() const {
-    return coada_asteptare.empty() && cereri_active.empty();
+    if( cereri_active.empty() && !coada_asteptare.empty() )
+        cout<<"Vezi ca ai in catalog un aparat pe care tehnicienii nu stiu sa ti-l repare verfica raport cereri in asteptare sa vezi cartita\n";
+    return cereri_active.empty() ;
 }
 
 void ServiceManager::afiseaza_coada_asteptare() const{

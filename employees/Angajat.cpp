@@ -83,7 +83,7 @@ void verify_CNP(string CNP)
         throw(std::invalid_argument("CNP ul " + CNP + " este invalid(cod judet invalid)\n"));
     }
 
-    verify_cifra_control(CNP);
+    //verify_cifra_control(CNP);
 };
 
 int get_varsta(const string cod)
@@ -95,7 +95,7 @@ int get_varsta(const string cod)
         an_nastere += (cod[1] - '0') * 10;
         an_nastere += (cod[2] - '0') ;
     }
-    if(cod[0] == '5' || cod[0] == '6')
+    else if(cod[0] == '5' || cod[0] == '6')
     {
         an_nastere = 2000;
         an_nastere += (cod[1] - '0') * 10;

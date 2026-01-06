@@ -93,14 +93,27 @@ void GestiuneAngajati::incarcaDinFisier(const string &numeFisier)
                 throw invalid_argument("Lipseste CNP");
             if (!getline(ss, data, ','))
                 throw invalid_argument("Lipseste data");
-            if (!getline(ss, oras, ','))
-                throw invalid_argument("Lipseste orasul");
 
             auto trim = [](string &s)
             {
-                s.erase(0, s.find_first_not_of(" "));
+                s.erase(0, s.find_first_not_of(" \t\r\n"));
+                size_t last = s.find_last_not_of(" \t\r\n");
+                if (last != string::npos)
+                    s.erase(last + 1);
             };
             trim(tip);
+
+            if (tip == "tehnician")
+            {
+                if (!getline(ss, oras, ','))
+                    throw invalid_argument("Lipseste orasul");
+            }
+            else
+            {
+                if (!getline(ss, oras))
+                    throw invalid_argument("Lipseste orasul");
+            }
+            trim(oras);
             trim(nume);
             trim(prenume);
             trim(cnp);
@@ -227,19 +240,21 @@ bool GestiuneAngajati::echipaCompleta() const
     int nr_tehn = 0, nr_recep = 0, nr_sup = 0;
     for (auto angajat = lista.begin(); angajat != lista.end(); angajat++)
     {
-        if ((*angajat)->get_tip() == "Tehnician"){
+        if ((*angajat)->get_tip() == "Tehnician")
+        {
             nr_tehn++;
         }
-        else if((*angajat)->get_tip() == "Supervizor"){
+        else if ((*angajat)->get_tip() == "Supervizor")
+        {
             nr_sup++;
         }
-        else{
+        else
+        {
             nr_recep++;
         }
-           
     }
 
-    if(!((nr_tehn >= 3)  && (nr_recep >= 1) && (nr_sup >= 0) ))
-        cout<<"Echipa incompleta tehnicieni: "<<nr_tehn<<" receptioneri: "<<nr_recep<<" supervizori: "<<nr_sup<<endl;
+    if (!((nr_tehn >= 3) && (nr_recep >= 1) && (nr_sup >= 0)))
+        cout << "Echipa incompleta tehnicieni: " << nr_tehn << " receptioneri: " << nr_recep << " supervizori: " << nr_sup << endl;
     return (nr_tehn >= 3) && (nr_recep >= 1) && (nr_sup >= 0);
 }

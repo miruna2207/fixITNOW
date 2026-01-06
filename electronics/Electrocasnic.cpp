@@ -20,5 +20,5 @@ double Electrocasnic::get_pret_catalog() const{
 }
 
 void Electrocasnic::afiseaza(ostream& file) const{
-    cout<<marca<<" "<<model<<" "<<an_fabricatie<<" "<<pret_catalog;
+    file<<marca<<" "<<model<<" "<<an_fabricatie<<" "<<pret_catalog;
 };

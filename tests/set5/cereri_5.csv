@@ -1,0 +1,11 @@
+ClientTV1,3,TV,Samsung,QLED_4K,2023,4000,138
+ClientTV2,2,TV,Samsung,Crystal_UHD,2022,2500,108
+ClientTV3,4,TV,Samsung,QLED_4K,2023,4000,138
+ClientLaptop1,3,Laptop,Asus,Zenbook,2022,4500,16
+ClientLaptop2,5,Laptop,Asus,ROG_Strix,2023,7500,17
+ClientFrigider1,2,Frigider,Beko,NeoFrost,2022,2500,1
+ClientFrigider2,1,Frigider,Beko,SideBySide,2023,5000,1
+ClientMasina1,4,Masina_Spalat,Bosch,Serie4,2022,2800,7
+ClientMasina2,3,Masina_Spalat,Bosch,Serie6,2023,4200,8
+ClientMix1,2,TV,Samsung,QLED_4K,2023,4000,138
+ClientMix2,3,Laptop,Asus,Zenbook,2022,4500,16

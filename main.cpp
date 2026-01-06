@@ -18,7 +18,7 @@ void meniuAngajati(ServiceManager &manager)
         switch (opt)
         {
         case 1:
-            manager.angajati().incarcaDinFisier("tests/angajati.csv");
+            manager.angajati().incarcaDinFisier("tests/set8/angajati_8.csv");
             break;
         case 2:
             cout << "CNP: ";
@@ -70,7 +70,7 @@ void meniuElectrocasnice(ServiceManager &manager)
         {
         case 1:
         {
-            manager.electrocasnice().incarcaModeleDinFisier("tests/electrocasnice_bun_1.csv");
+            manager.electrocasnice().incarcaModeleDinFisier("tests/set8/catalog_8.csv");
             break;
         }
         case 2:
@@ -117,7 +117,13 @@ void meniuRapoarte(ServiceManager &manager)
     int opt;
     do
     {
+        cout<<"\n\n";
+        cout << "========== RAPOARTE ==========\n";
         cout << "1.Top 3 Angajati cu cele mai mari Salarii\n2.Tehnician cu cea mai lunga durata reparatie\n";
+        cout<< "3.Afiseaza cereri in asteptare ordonate\n0.Pentru a iesi din meniu\n";
+        cout << "==============================\n";
+        cout << "Alegeti optiunea: ";
+        
         cin >> opt;
         switch(opt){
             case 1:
@@ -128,6 +134,9 @@ void meniuRapoarte(ServiceManager &manager)
                 manager.raport().Angajat_Longest_Reparatie(manager.getFinalizate(),manager.getActive(),manager.getAsteptare());
                 break;
             }
+            case 3:
+                manager.raport().Cereri_Asteptare_Ordonate(manager.getAsteptare());
+                break;
         }
     }while(opt != 0);
 }
@@ -143,7 +152,7 @@ void meniuProcesare(ServiceManager &manager, int &TIC)
         switch (opt)
         {
         case 1:
-            manager.cereri().incarcaDinFisier("tests/cereri_bune_1.csv");
+            manager.cereri().incarcaDinFisier("tests/set8/cereri_8.csv");
             break;
         case 2:
             manager.cereri().adaugaManual();
@@ -181,6 +190,7 @@ int main()
         cout << "1. Gestiune Angajati" << endl;
         cout << "2. Gestiune Electrocasnice" << endl;
         cout << "3. Procesare Cereri & Simulare" << endl;
+        cout << "4. Rapoarte" << endl;
         cout << "0. Iesire Program" << endl;
         cout << "==========================================================" << endl;
         cout << "Alege categoria: ";
@@ -196,6 +206,9 @@ int main()
             break;
         case 3:
             meniuProcesare(manager, TIC);
+            break;
+        case 4:
+            meniuRapoarte(manager);
             break;
         case 0:
             cout << "Inchidere program..." << endl;

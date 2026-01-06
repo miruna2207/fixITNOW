@@ -1,27 +1,65 @@
-# Compilatorul folosit
+# Makefile cu compilare incrementală pentru Service Manager
 CXX = g++
-# Flag-uri pentru compilare (C++17 pentru unique_ptr și mapări moderne)
-CXXFLAGS = -std=c++17 -Wall -I. -IGestiuneAngajati -IGestiuneElectrocasnice -Ielectronics
-
-# Identificăm automat toate fișierele .cpp din foldere și subfoldere
-SRCS = main.cpp \
-       ServiceManager.cpp\
-       $(wildcard employees/*.cpp)\
-       $(wildcard GestiuneAngajati/*.cpp) \
-       $(wildcard GestiuneElectrocasnice/*.cpp) \
-       $(wildcard electronics/*.cpp)\
-       $(wildcard GestiuneCereri/*.cpp)
-
-
-# Numele executabilului final
+CXXFLAGS = -std=c++17 -Wall -Wextra -O2
 TARGET = service.exe
+
+# Lista tuturor fișierelor sursă
+SRCS = main.cpp \
+       ServiceManager.cpp \
+       employees/Angajat.cpp \
+       employees/Tehnician.cpp \
+       employees/Receptioner.cpp \
+       employees/Supervizor.cpp \
+       electronics/Electrocasnic.cpp \
+       electronics/Laptop.cpp \
+       electronics/TV.cpp \
+       electronics/Frigider.cpp \
+       electronics/Masina_Spalat.cpp \
+       GestiuneAngajati/GestiuneAngajati.cpp \
+       GestiuneElectrocasnice/GestiuneElectrocasnice.cpp \
+       GestiuneCereri/cerereReparatie.cpp \
+       GestiuneCereri/GestiuneCereri.cpp \
+       Raportari/GestiuneRaportari.cpp
+
+# Crează lista de fișiere obiect (.o) din surse
+OBJS = $(SRCS:.cpp=.o)
+
+# Include path-uri
+INCLUDES = -I. -Iemployees -Ielectronics -IGestiuneAngajati -IGestiuneElectrocasnice -IGestiuneCereri -IRaportari
 
 # Regula principală
 all: $(TARGET)
 
-$(TARGET): $(SRCS)
-	$(CXX) $(CXXFLAGS) $(SRCS) -o $(TARGET)
+# Linkarea executabilului din fișiere obiect
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(TARGET)
 
-# Curățarea fișierelor generate
+# Regula generică pentru a compila orice .cpp în .o
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
+
+# Curăță tot
 clean:
-	del $(TARGET)
+	del $(TARGET) 2>nul
+	del *.o 2>nul
+	del employees\*.o 2>nul
+	del electronics\*.o 2>nul
+	del GestiuneAngajati\*.o 2>nul
+	del GestiuneElectrocasnice\*.o 2>nul
+	del GestiuneCereri\*.o 2>nul
+	del Raportari\*.o 2>nul
+
+# Compilează și rulează
+run: $(TARGET)
+	$(TARGET)
+
+# Recompilează de la zero
+rebuild: clean all
+
+# Compilează DOAR main.cpp și face link rapid
+mainonly: main.o
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c main.cpp -o main.o
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(TARGET)
+	@echo "Recompilat doar main.cpp și făcut link!"
+
+.PHONY: all clean run rebuild mainonly

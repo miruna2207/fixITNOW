@@ -38,8 +38,12 @@ void GestiuneElectrocasnice::incarcaModeleDinFisier(const string &numeFisier)
 
             auto trim = [](string &s)
             {
-                s.erase(0, s.find_first_not_of(" "));
+                s.erase(0, s.find_first_not_of(" \t\r\n"));
+                size_t last = s.find_last_not_of(" \t\r\n");
+                if (last != string::npos)
+                    s.erase(last + 1);
             };
+
             trim(tip);
             trim(model);
             trim(marca);
