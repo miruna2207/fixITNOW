@@ -35,3 +35,9 @@ Electrocasnic* CerereReparatie::get_aparat() const { return aparat.get(); }
 Tehnician* CerereReparatie::get_tehnician_alocat() const { return tehnician_alocat; }
 
 
+void CerereReparatie::afisare(ostream& dev){
+    dev<<cerereID<<" "<<numeClient<<" "<<complexitate<<" "<<durata_reparatie<<" "<<timp_ramas<<" "
+    <<pret_reparatie<<" ";
+    aparat->afiseaza(dev);
+};
+

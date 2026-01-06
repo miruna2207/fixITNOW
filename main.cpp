@@ -117,12 +117,17 @@ void meniuRapoarte(ServiceManager &manager)
     int opt;
     do
     {
-        cout << "1.Top 3 Angajati cu cele mai mari Salarii\n";
+        cout << "1.Top 3 Angajati cu cele mai mari Salarii\n2.Tehnician cu cea mai lunga durata reparatie\n";
         cin >> opt;
         switch(opt){
             case 1:
-                manager.raport().raportTopSalarii(manager.angajati().get_lista_angajati());
+                manager.raport().raportTopSalariuAngajati(manager.angajati().get_lista_angajati());
                 break;
+
+            case 2:{
+                manager.raport().Angajat_Longest_Reparatie(manager.getFinalizate(),manager.getActive(),manager.getAsteptare());
+                break;
+            }
         }
     }while(opt != 0);
 }

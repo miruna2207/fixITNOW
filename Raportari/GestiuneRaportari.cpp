@@ -4,6 +4,54 @@
 #include <iostream>
 #include <fstream>
 
+template <typename T>
+void gasesteCeaMaiLungaReparatie(const T& container, int& best_reparatie, Tehnician*& t) {
+    for (const auto& cerere : container) {
+        if (cerere->get_durata_reparatie() > best_reparatie) {
+            best_reparatie = cerere->get_durata_reparatie();
+            t = cerere->get_tehnician_alocat();
+        }
+    }
+}
+
+void GestiuneRaportari::Cereri_Asteptare_Ordonate(const deque<unique_ptr<CerereReparatie>>& asteptare) {
+    if (asteptare.empty()) return;
+
+    map<string, map<string, vector<CerereReparatie*>>> grupate;
+
+    for (auto it = asteptare.begin(); it != asteptare.end(); ++it) {
+        CerereReparatie* ptr = it->get();
+        string tip = ptr->get_aparat()->get_tip();
+        string marca = ptr->get_aparat()->get_marca();
+        
+        grupate[tip][marca].push_back(ptr);
+    }
+
+    ofstream out("../output/Cereri_Asteptare_ordonate.csv");
+    if( !out){
+        cout <<"fisierul nu poate fi deschis\n";
+        return;
+    }
+
+    for (auto itTip = grupate.begin(); itTip != grupate.end(); ++itTip) {
+        
+
+        for (auto itMarca = itTip->second.begin(); itMarca != itTip->second.end(); ++itMarca) {
+    
+            sort(itMarca->second.begin(), itMarca->second.end(), [](CerereReparatie* a, CerereReparatie* b) {
+                return a->get_aparat()->get_model() < b->get_aparat()->get_model();
+            });
+
+            // Pasul 3: Afisarea obiectelor folosind functia ta
+            for (auto itCerere = itMarca->second.begin(); itCerere != itMarca->second.end(); ++itCerere) {
+                
+                (*itCerere)->afisare(out); 
+                out << "\n";
+            }
+        }
+    }
+}
+
 void GestiuneRaportari::raportAparateRespinse(const vector<unique_ptr<CerereReparatie>> &respinse)
 {
     if (respinse.empty())
@@ -66,3 +114,23 @@ void GestiuneRaportari::raportTopSalariuAngajati(const vector<unique_ptr<Angajat
     }
     file.close();
 };
+
+ void GestiuneRaportari::Angajat_Longest_Reparatie(const vector<unique_ptr<CerereReparatie>>& cereriFinalizate,
+    const vector<unique_ptr<CerereReparatie>>& cereriActive, const deque<unique_ptr<CerereReparatie>>& cereriAsteptare)  {
+    int best_reparatie = -1;
+    Tehnician* t =nullptr;
+
+    gasesteCeaMaiLungaReparatie(cereriFinalizate,best_reparatie,t);
+    gasesteCeaMaiLungaReparatie(cereriAsteptare,best_reparatie,t);
+    gasesteCeaMaiLungaReparatie(cereriActive,best_reparatie,t);
+
+    ofstream file("../output/Tehnician_cu_cea_mai_lunga_reparatie.csv");
+
+    if(!file){
+        cout<<"fisierul nu poate fi deschis ../output/Tehnician_cu_cea_mai_lunga_reparatie.csv\n";
+        return;
+    }
+    
+    t->afiseaza(file);
+    file<<" "<<t->get_Salariu();
+ }

@@ -40,6 +40,8 @@ public:
     bool cereriInSistem() const;
     const vector<unique_ptr<CerereReparatie>>& getFinalizate() { return cereri_finalizate; }
     const vector<unique_ptr<CerereReparatie>>& getRejectate() { return cereri_respinse; }
+    const vector<unique_ptr<CerereReparatie>>& getActive() { return cereri_active; }
+    const deque<unique_ptr<CerereReparatie>>& getAsteptare() { return coada_asteptare;};
     
 };
 
