@@ -1,24 +1,20 @@
 #pragma once
 #include <vector>
 #include <memory>
-#include<deque>
-#include "../GestiuneCereri/GestiuneCereri.h"
+#include <deque>
 
+class CerereReparatie;
+class Angajat;
 
 class IGestiuneRaportari {
 public:
-
-    IGestiuneRaportari() = default;
-
     virtual ~IGestiuneRaportari() = default;
-    
-    virtual void raportAparateRespinse(const vector<unique_ptr<CerereReparatie>>& respinse) = 0;
 
-    virtual void raportTopSalariuAngajati(const vector<unique_ptr<Angajat>>& angajati) = 0;
-
-    virtual void Angajat_Longest_Reparatie(const vector<unique_ptr<CerereReparatie>>& cereriFinalizate ,
-      const vector<unique_ptr<CerereReparatie>>& cereriActive , const deque<unique_ptr<CerereReparatie>>& cereriAsteptare ) = 0; 
-
-    virtual void Cereri_Asteptare_Ordonate(const deque<unique_ptr<CerereReparatie>>& cereriAsteptare ) = 0 ;
-
-    };
+    virtual void raportAparateRespinse(const std::vector<std::unique_ptr<CerereReparatie>>& respinse) = 0;
+    virtual void raportTopSalariuAngajati(const std::vector<std::unique_ptr<Angajat>>& angajati) = 0;
+    virtual void Cereri_Asteptare_Ordonate(const std::deque<std::unique_ptr<CerereReparatie>>& cereriAsteptare) = 0;
+    virtual void Angajat_Longest_Reparatie(
+        const std::vector<std::unique_ptr<CerereReparatie>>& cereriFinalizate,
+        const std::vector<std::unique_ptr<CerereReparatie>>& cereriActive,
+        const std::deque<std::unique_ptr<CerereReparatie>>& cereriAsteptare) = 0;
+};

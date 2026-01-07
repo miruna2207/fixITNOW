@@ -182,7 +182,7 @@ void Angajat::verify_angajat() const
 };
   
     void Angajat::afiseaza(ostream& file) const{
-        file<<get_tip()<<" "<<nume<<" "<<prenume<<" "<<CNP<<" "<<id<<" "<<data_angajare<<" "<<oras_domiciliu;
+        file<<get_tip()<<" ,"<<nume<<" ,"<<prenume<<" ,"<<CNP<<" ,"<<id<<" ,"<<data_angajare<<" ,"<<oras_domiciliu;
     };
 
     string Angajat::get_CNP() const{

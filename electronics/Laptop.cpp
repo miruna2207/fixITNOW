@@ -8,5 +8,5 @@ string Laptop::get_tip() const {
  
  void Laptop::afiseaza(ostream& file) const{
     Electrocasnic::afiseaza(file);
-    file<<" "<<RAM;
+    file<<" ,"<<RAM;
  };

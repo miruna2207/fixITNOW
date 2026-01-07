@@ -127,6 +127,8 @@ void GestiuneAngajati::incarcaDinFisier(const string &numeFisier)
                     throw runtime_error("Lipseste numarul de competente");
 
                 int nrComp = stoi(strNrComp);
+                if(nrComp <= 0)
+                    throw out_of_range("Nr competente nu este > 0 "+nrComp);
                 vector<Competenta> comp_citite;
 
                 for (int i = 0; i < nrComp; i++)

@@ -1,7 +1,36 @@
-tehnician,Veteran,Ion,1650101400012,01.01.2000,Bucuresti,2,TV,Samsung,Laptop,Asus
-tehnician,Junior,Vasile,5050101400013,15.06.2022,Cluj,1,Laptop,Asus
-tehnician,MidLevel,Mihai,1770101400014,10.01.2015,Iasi,1,TV,Samsung
-receptioner,Popa,Elena,5060101400022,10.02.2021,Bucuresti
-receptioner,Marin,Anca,5070101400023,01.09.2020,Cluj
-supervizor,Constantin,Paul,1670101400025,01.01.2010,Bucuresti
-supervizor,Grigore,Dan,1660101400026,10.06.2008,Brasov
+# TEHNICIENI (25) - competențe diversificate
+tehnician,Popescu,Ion,5010101400012,01.01.2020,Bucuresti,2,TV,Samsung,Frigider,Beko
+tehnician,Ionescu,Vasile,5020101400013,15.06.2021,Cluj,3,Laptop,Asus,Laptop,HP,Laptop,Lenovo
+tehnician,Georgescu,Mihai,5030101400014,10.01.2019,Iasi,2,TV,LG,Masina_Spalat,Bosch
+tehnician,Radu,Andrei,5040101400015,22.03.2018,Brasov,4,TV,Samsung,Laptop,Asus,Frigider,Beko,Masina_Spalat,Bosch
+tehnician,Dumitru,Stefan,5050101400016,05.11.2022,Timisoara,2,Laptop,Apple,Masina_Spalat,Indesit
+tehnician,Stoica,Alexandru,5060101400017,14.02.2020,Craiova,3,TV,Sony,Frigider,Arctic,Laptop,Lenovo
+tehnician,Stan,Cristian,5070101400018,30.08.2021,Galati,1,Masina_Spalat,Whirlpool
+tehnician,Lupu,Gabriel,5080101400019,12.04.2017,Constanta,2,Frigider,Samsung,Masina_Spalat,Miele
+tehnician,Matei,Bogdan,5090101400020,20.12.2022,Oradea,3,Laptop,Asus,TV,Philips,Frigider,LG
+tehnician,Sandu,Doru,5100101400021,03.07.2021,Sibiu,2,TV,TCL,Masina_Spalat,Samsung
+tehnician,Miron,Vicentiu,5110101400022,18.09.2019,Bacau,4,Laptop,HP,Frigider,Beko,TV,Samsung,Masina_Spalat,Whirlpool
+tehnician,Enache,Marian,5120101400023,25.05.2023,Arad,2,Laptop,Asus,TV,LG
+tehnician,Popa,Victor,5130101400024,10.02.2021,Bucuresti,3,Frigider,Arctic,Masina_Spalat,Indesit,Laptop,Apple
+tehnician,Marin,Catalin,5140101400025,01.09.2020,Cluj,1,TV,Samsung
+tehnician,Nistor,George,5150101400026,15.03.2022,Iasi,2,Laptop,Lenovo,Masina_Spalat,Bosch
+tehnician,Dobre,Robert,5160101400027,20.11.2019,Ploiesti,4,TV,Sony,Frigider,Samsung,Laptop,HP,Masina_Spalat,Miele
+tehnician,Constantin,Alex,5170101400028,01.01.2015,Bucuresti,3,TV,Philips,Laptop,Asus,Frigider,LG
+tehnician,Grigore,Paul,5180101400029,10.06.2016,Brasov,2,Masina_Spalat,Samsung,Frigider,Beko
+tehnician,Vasile,Radu,5190101400030,05.03.2018,Timisoara,1,Laptop,Apple
+tehnician,Munteanu,Adi,5200101400031,12.12.2014,Constanta,3,TV,LG,Frigider,Arctic,Masina_Spalat,Whirlpool
+tehnician,Florescu,Ionut,5210101400032,07.07.2020,Iasi,2,Laptop,Lenovo,TV,TCL
+tehnician,Serban,Marius,5220101400033,19.10.2021,Cluj,4,TV,Samsung,Masina_Spalat,Bosch,Frigider,Samsung,Laptop,HP
+tehnician,Tudor,Ciprian,5230101400034,23.04.2019,Bucuresti,1,Masina_Spalat,Indesit
+tehnician,Barbu,Andrei,5240101400035,14.08.2022,Brasov,3,Laptop,Asus,TV,Philips,Frigider,LG
+tehnician,Neagu,Stefan,5250101400036,30.01.2020,Timisoara,2,TV,Sony,Masina_Spalat,Samsung
+
+# RECEPTIONERI (3)
+receptioner,Receptioner1,Ana,6010101400011,10.02.2021,Bucuresti
+receptioner,Receptioner2,Bianca,6020101400022,01.09.2020,Cluj
+receptioner,Receptioner3,Carmen,6030101400033,15.03.2022,Iasi
+
+# SUPERVOZORI (3)
+supervizor,Supervizor1,Dan,7010101400011,01.01.2015,Bucuresti
+supervizor,Supervizor2,Eugen,7020101400022,10.06.2016,Brasov
+supervizor,Supervizor3,Flaviu,7030101400033,05.03.2018,Timisoara

@@ -9,5 +9,5 @@ string TV::get_tip() const{
 
 void TV::afiseaza(ostream& file) const{
     Electrocasnic::afiseaza(file);
-    file<<" "<<diag<<" "<<unitate;
+    file<<" ,"<<diag<<" ,"<<unitate;
 };

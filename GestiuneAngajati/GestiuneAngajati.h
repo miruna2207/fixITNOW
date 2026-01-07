@@ -14,6 +14,6 @@ public:
     void afisareToti() const override;
     void stergeAngajat(const string& cnp) override;
     void modificaNume(const string& cnp, const string& numeNou) override;
-    Angajat* gasesteDupaCNP(const std::string& cnp) const;
+    Angajat* gasesteDupaCNP(const std::string& cnp) const override;
     bool echipaCompleta() const override;
 };

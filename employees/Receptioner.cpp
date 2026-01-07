@@ -17,7 +17,8 @@ double Receptioner::get_Salariu()  {
         return Angajat::get_Salariu();
     };
 
-Receptioner::Receptioner(const string n,const string p,const string c,const string d,const string o):Angajat(n,p,c,d,o){
+Receptioner::Receptioner(const string n,const string p,const string c,const string d,const string o)
+                                                                :Angajat(n,p,c,d,o){
 
 };
 

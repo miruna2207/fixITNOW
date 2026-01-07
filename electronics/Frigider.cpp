@@ -5,7 +5,7 @@ Frigider::Frigider(const string brand,const string mod,int an,double price,bool 
 
 void Frigider::afiseaza(ostream& file) const{
     Electrocasnic::afiseaza(file);
-    file<<" "<<congelator;
+    file<<" ,"<<congelator;
 }
 
 string  Frigider::get_tip() const{

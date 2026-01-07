@@ -7,7 +7,7 @@ void GestiuneElectrocasnice::incarcaModeleDinFisier(const string &numeFisier)
     ifstream f(numeFisier);
     if (!f)
     {
-        cerr << "Eroare: Nu s-a putut deschide fisierul de electrocasnice: " << numeFisier << endl;
+        cout << "Eroare: Nu s-a putut deschide fisierul de electrocasnice: " << numeFisier << endl;
         return;
     }
 
@@ -51,6 +51,11 @@ void GestiuneElectrocasnice::incarcaModeleDinFisier(const string &numeFisier)
             trim(pret);
             an_productie = stoi(an);
             pret_catalog = stod(pret);
+            if(pret_catalog < 0)
+                throw out_of_range("Pret_catalog este negativ" );
+
+            if(an_productie < 0 )
+             throw out_of_range(" An productie este negativ");
 
             unique_ptr<Electrocasnic> nou;
             if (tip == "Laptop")
@@ -111,7 +116,7 @@ void GestiuneElectrocasnice::incarcaModeleDinFisier(const string &numeFisier)
         }
         catch (const exception &e)
         {
-            cerr << "Eroare la citire: Electrocasnic invalid pe linia " << nrLinie
+            cout << "Eroare la citire: Electrocasnic invalid pe linia " << nrLinie
                  << ", cauza: " << e.what() << endl;
         }
     }

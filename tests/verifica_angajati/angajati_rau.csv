@@ -1,0 +1,48 @@
+# ---------- ANGAJATI VALABILI ----------
+tehnician, Popescu, Ion, 1900101410011, 01.01.2020, Bucuresti, 2, TV, Samsung, Frigider, Arctic
+# -----------------------------------------
+
+
+# ---------- ERORI TIP ANGAJAT ----------
+, Popescu, Ion, 1900101410011, 01.01.2020, Bucuresti
+manager, Popescu, Ion, 1900101410011, 01.01.2020, Bucuresti
+
+# ---------- ERORI NUME / PRENUME ----------
+receptioner, Al, Popescu, 1900101410011, 01.01.2020, Bucuresti
+receptioner, Popescu, Io, 1900101410011, 01.01.2020, Bucuresti
+
+# ---------- ERORI CNP ----------
+receptioner, Popescu, Ion, 19001014, 01.01.2020, Bucuresti
+receptioner, Popescu, Ion, 19001A1410011, 01.01.2020, Bucuresti
+receptioner, Popescu, Ion, 3900101410011, 01.01.2020, Bucuresti
+
+# ---------- Angajat valabil -------------
+receptioner, Ionescu, Maria, 2850505410021, 15.05.2021, Ploiesti
+# ----------------------------------------
+
+receptioner, Popescu, Ion, 6250101410011, 01.01.2020, Bucuresti
+receptioner, Popescu, Ion, 1900101990011, 01.01.2020, Bucuresti
+
+# ---------- ERORI DATA ANGAJARE ----------
+receptioner, Popescu, Ion, 1900101410011, 32.01.2020, Bucuresti
+receptioner, Popescu, Ion, 1900101410011, 01.13.2020, Bucuresti
+receptioner, Popescu, Ion, 1900101410011, 01.01.2099, Bucuresti
+
+# ----------- angajat valabil -----------
+supervizor, Marin, Andrei, 1851010410034, 10.10.2015, Bucuresti
+# -----------------------------------------
+
+# ---------- ERORI ORAS ----------
+receptioner, Popescu, Ion, 1900101410011, 01.01.2020,
+tehnician, Popescu, Ion, 1900101410011, 01.01.2020
+
+# ---------- ERORI TEHNICIAN ----------
+tehnician, Popescu, Ion, 1900101410011, 01.01.2020, Bucuresti, 0
+tehnician, Popescu, Ion, 1900101410011, 01.01.2020, Bucuresti, 2, TV
+tehnician, Popescu, Ion, 1900101410011, 01.01.2020, Bucuresti, 1, TV
+
+# ---------- ERORI FORMAT COMPETENTE ----------
+tehnician, Popescu, Ion, 1900101410011, 01.01.2020, Bucuresti, 2, TV, Samsung, Laptop
+
+# -------------angajat valabil -----------------
+tehnician, Dumitru, Elena, 6051212410041, 20.03.2023, Ilfov, 1, Masina_Spalat, LG

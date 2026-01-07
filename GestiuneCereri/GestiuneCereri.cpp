@@ -121,6 +121,7 @@ void GestiuneCereri::adaugaManual()
     }
 }
 
+//========================== functie utilitara ===========================
 unique_ptr<Electrocasnic> citesteAparat(stringstream &ss, string tip, int nr_linie)
 {
     string marca, model, anStr, pretStr;

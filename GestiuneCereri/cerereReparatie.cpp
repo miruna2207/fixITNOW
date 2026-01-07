@@ -1,5 +1,5 @@
 #include "cerereReparatie.h"
-
+#include "../GestiuneElectrocasnice/GestiuneElectrocasnice.h"
 int CerereReparatie::nextID = 1;
 
 CerereReparatie::CerereReparatie(unique_ptr<Electrocasnic> e, const string nume, int comp) :
@@ -36,10 +36,10 @@ Tehnician* CerereReparatie::get_tehnician_alocat() const { return tehnician_aloc
 
 
 void CerereReparatie::afisare(ostream& dev){
-    dev<<cerereID<<" "<<numeClient<<" "<<complexitate<<" "<<durata_reparatie<<" "<<timp_ramas<<" "
-    <<pret_reparatie<<" ";
+    dev<<cerereID<<" ,"<<numeClient<<" ,"<<complexitate<<" ,"<<durata_reparatie<<" ,"<<timp_ramas<<" ,"
+    <<pret_reparatie<<" ,";
     if( aparat){
-       dev<<aparat->get_tip()<<" ";
+       dev<<aparat->get_tip()<<" ,";
        aparat->afiseaza(dev);}
     else
         dev<<" fara aparat asociat";

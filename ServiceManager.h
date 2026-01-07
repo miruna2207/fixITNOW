@@ -3,7 +3,10 @@
 #include <vector>
 #include <memory>
 #include "../GestiuneCereri/GestiuneCereri.h"
+#include "../GestiuneAngajati/GestiuneAngajati.h"
+#include "../GestiuneElectrocasnice/GestiuneElectrocasnice.h"
 #include "../Raportari/GestiuneRaportari.h"
+
 class ServiceManager {
 private:
     unique_ptr<IGestiuneAngajati> ordinAngajati;
@@ -16,33 +19,26 @@ private:
     vector<unique_ptr<CerereReparatie>> cereri_finalizate;
     vector<unique_ptr<CerereReparatie>> cereri_respinse;
 
-    ServiceManager() {
-        ordinAngajati = make_unique<GestiuneAngajati>();
-        ordinElectrocasnice = make_unique<GestiuneElectrocasnice>();
-        ordinCereri = make_unique<GestiuneCereri>();
-        ordinRaport = make_unique<GestiuneRaportari>();
-    }
+    ServiceManager() ;
 
 public:
-    static ServiceManager& getInstance() {
-        static ServiceManager instance;
-        return instance;
-    }
+    static ServiceManager& getInstance() ;
 
-    IGestiuneAngajati& angajati() { return *ordinAngajati; }
-    IGestiuneElectrocasnice& electrocasnice() { return *ordinElectrocasnice;};
-    IGestiuneCereri& cereri() { return *ordinCereri;};
-    IGestiuneRaportari& raport() { return *ordinRaport;};
+    IGestiuneAngajati& angajati();
+    IGestiuneElectrocasnice& electrocasnice() ;
+    IGestiuneCereri& cereri() ;
+    IGestiuneRaportari& raport() ;
     
     void proceseazaCerereNoua(unique_ptr<CerereReparatie> cr);
     void updateSimulare(); 
     void afiseaza_coada_asteptare() const;
     bool cereriInSistem() const;
-    const vector<unique_ptr<CerereReparatie>>& getFinalizate() { return cereri_finalizate; }
-    const vector<unique_ptr<CerereReparatie>>& getRejectate() { return cereri_respinse; }
-    const vector<unique_ptr<CerereReparatie>>& getActive() { return cereri_active; }
-    const deque<unique_ptr<CerereReparatie>>& getAsteptare() { return coada_asteptare;};
+    const vector<unique_ptr<CerereReparatie>>& getFinalizate() ;
+    const vector<unique_ptr<CerereReparatie>>& getRejectate() ;
+    const vector<unique_ptr<CerereReparatie>>& getActive() ;
+    const deque<unique_ptr<CerereReparatie>>& getAsteptare() ;
     
 };
 
-Tehnician* CelMaiBunTehnician(const string tipCautat,const string marcaCautata,const vector<unique_ptr<Angajat>>& lista_angajati);
+Tehnician* CelMaiBunTehnician(const string tipCautat, const string marcaCautata,
+                            const vector<unique_ptr<Angajat>>& lista_angajati);

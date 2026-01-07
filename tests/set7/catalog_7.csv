@@ -1,5 +1,41 @@
-TV,Samsung,QLED_4K,2023,4000,138,cm
-TV,Samsung,Old_Model,2005,800,80,cm
+# LAPTOP (10 modele)
 Laptop,Asus,Zenbook,2022,4500,16
-Laptop,Asus,Old_Laptop,2008,1200,4
-Frigider,Beko,Very_Old,2000,500, 0
+Laptop,Asus,ROG_Strix,2023,7500,17
+Laptop,Asus,VivoBook,2021,3200,15
+Laptop,Asus,TUF_Gaming,2022,5500,16
+Laptop,Apple,MacBook_Pro,2023,9000,14
+Laptop,Apple,MacBook_Air,2022,5500,13
+Laptop,HP,Pavilion,2022,3800,15
+Laptop,HP,Spectre,2023,8500,16
+Laptop,Lenovo,ThinkPad,2021,5500,15
+Laptop,Lenovo,Legion_5,2022,6000,16
+
+# TV (8 modele)
+TV,Samsung,QLED_4K,2023,4000,138,cm
+TV,Samsung,Crystal_UHD,2022,2500,108,cm
+TV,Samsung,The_Frame,2023,5500,138,cm
+TV,LG,OLED_C2,2022,6000,140,cm
+TV,LG,NanoCell,2021,3500,125,cm
+TV,Sony,Bravia,2021,5000,120,cm
+TV,Philips,Ambilight,2022,3500,120,cm
+TV,TCL,QLED_Pro,2022,2500,108,cm
+
+# FRIGIDERE (8 modele)
+Frigider,Beko,NeoFrost,2022,2500, 1
+Frigider,Beko,SideBySide,2023,5000, 1
+Frigider,Arctic,AD60310,2021,1800, 1
+Frigider,Arctic,FullFresh,2022,2200, 1
+Frigider,Samsung,FamilyHub,2023,8000, 1
+Frigider,LG,InstaView,2023,5500, 1
+Frigider,Whirlpool,FrenchDoor,2022,3200, 1
+Frigider,Gorenje,SmartCool,2023,2900, 1
+
+# MASINI SPALAT (8 modele)
+Masina_Spalat,Bosch,Serie4,2022,2800,7
+Masina_Spalat,Bosch,Serie6,2023,4200,8
+Masina_Spalat,Bosch,Serie8,2024,5000,10
+Masina_Spalat,Indesit,EcoTime,2021,1500,6
+Masina_Spalat,Indesit,MyTime,2022,1700,7
+Masina_Spalat,Whirlpool,FreshCare,2023,3200,9
+Masina_Spalat,Samsung,Bubble,2022,2800,8
+Masina_Spalat,Miele,W1_Pro,2024,7000,9

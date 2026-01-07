@@ -3,9 +3,9 @@
 #include <memory>
 #include <ctime>
 #include <iostream>
-#include "../GestiuneElectrocasnice/GestiuneElectrocasnice.h"
-#include "../GestiuneAngajati/GestiuneAngajati.h"
 
+class Electrocasnic;
+class Tehnician;
 using namespace std;
 
 class CerereReparatie {

@@ -4,11 +4,11 @@ Laptop,Lenovo,ThinkPad,2021,5500,15
 Laptop,HP,Pavilion,2022,3800,15
 TV,Samsung,QLED_4K,2023,4000,138,cm
 TV,LG,OLED_C2,2022,6000,140,cm
-TV,Sony,Bravia,2021,5000,120,cm
+TV,Sony,Bravia,2021,-5000,120,cm
 Frigider,Beko,NeoFrost,2022,2500, 1
 Frigider,Arctic,AD60310,2021,1800, 1
 Masina_Spalat,Bosch,Serie4,2022,2800,7
-Masina_Spalat,Indesit,EcoTime,2021,1500,6
+Masina_Spalat,Indesit,EcoTime,2021,1500,
 Masina_Spalat,Whirlpool,FreshCare,2023,3200,9
 Laptop,Asus,ROG_Strix,2023,7500,17
 TV,Samsung,Crystal_UHD,2022,2500,108,cm

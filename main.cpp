@@ -18,7 +18,7 @@ void meniuAngajati(ServiceManager &manager)
         switch (opt)
         {
         case 1:
-            manager.angajati().incarcaDinFisier("tests/set8/angajati_8.csv");
+            manager.angajati().incarcaDinFisier("tests/set5/angajati_5.csv");
             break;
         case 2:
             cout << "CNP: ";
@@ -70,7 +70,7 @@ void meniuElectrocasnice(ServiceManager &manager)
         {
         case 1:
         {
-            manager.electrocasnice().incarcaModeleDinFisier("tests/set8/catalog_8.csv");
+            manager.electrocasnice().incarcaModeleDinFisier("tests/set5/catalog_5.csv");
             break;
         }
         case 2:
@@ -117,106 +117,135 @@ void meniuRapoarte(ServiceManager &manager)
     int opt;
     do
     {
-        cout<<"\n\n";
+        cout << "\n\n";
         cout << "========== RAPOARTE ==========\n";
         cout << "1.Top 3 Angajati cu cele mai mari Salarii\n2.Tehnician cu cea mai lunga durata reparatie\n";
-        cout<< "3.Afiseaza cereri in asteptare ordonate\n0.Pentru a iesi din meniu\n";
+        cout << "3.Afiseaza cereri in asteptare ordonate\n0.Pentru a iesi din meniu\n";
         cout << "==============================\n";
         cout << "Alegeti optiunea: ";
-        
-        cin >> opt;
-        switch(opt){
-            case 1:
-                manager.raport().raportTopSalariuAngajati(manager.angajati().get_lista_angajati());
-                break;
 
-            case 2:{
-                manager.raport().Angajat_Longest_Reparatie(manager.getFinalizate(),manager.getActive(),manager.getAsteptare());
-                break;
-            }
-            case 3:
-                manager.raport().Cereri_Asteptare_Ordonate(manager.getAsteptare());
-                break;
-        }
-    }while(opt != 0);
-}
-void meniuProcesare(ServiceManager &manager, int &TIC)
-{
-    int opt;
-    do
-    {
-        cout << "\n--- PROCESARE CERERI ---" << endl;
-        cout << "1. Incarca cereri din fisier\n2. Adauga cerere manual\n";
-        cout << "3. START Simulare Completa (Loop automat)\n4. Ruleaza 1 TIC\n0. Revenire\nAlegeti: ";
         cin >> opt;
         switch (opt)
         {
         case 1:
-            manager.cereri().incarcaDinFisier("tests/set8/cereri_8.csv");
-            break;
-        case 2:
-            manager.cereri().adaugaManual();
-            break;
-        case 3:
-            if (!manager.angajati().echipaCompleta())
-                break;
-            while (!manager.cereriInSistem())
+            try
             {
-                cout << "\n--- TIC " << TIC << " ---" << endl;
-                manager.updateSimulare();
-                TIC++;
+                manager.raport().raportTopSalariuAngajati(
+                    manager.angajati().get_lista_angajati());
+            }
+            catch (const exception &e)
+            {
+                cerr << "[EROARE] " << e.what() << endl;
             }
             break;
-        case 4:
-            if (manager.angajati().echipaCompleta())
+
+        case 2:
+            try
             {
-                manager.updateSimulare();
-                TIC++;
+                manager.raport().Angajat_Longest_Reparatie(
+                    manager.getFinalizate(),
+                    manager.getActive(),
+                    manager.getAsteptare());
+            }
+            catch (const exception &e)
+            {
+                cerr << "[EROARE] " << e.what() << endl;
+            }
+            break;
+
+        case 3:
+            try
+            {
+                manager.raport().Cereri_Asteptare_Ordonate(
+                    manager.getAsteptare());
+            }
+            catch (const exception &e)
+            {
+                cerr << "[EROARE] " << e.what() << endl;
             }
             break;
         }
-    } while (opt != 0);
+    }while (opt != 0);
 }
-
-int main()
-{
-    ServiceManager &manager = ServiceManager::getInstance();
-    int TIC = 1;
-    int optiune;
-
-    do
+            
+    
+    void meniuProcesare(ServiceManager & manager, int &TIC)
     {
-        cout << "\n========== SERVICE ELECTRONICE - MENU PRINCIPAL ==========" << endl;
-        cout << "1. Gestiune Angajati" << endl;
-        cout << "2. Gestiune Electrocasnice" << endl;
-        cout << "3. Procesare Cereri & Simulare" << endl;
-        cout << "4. Rapoarte" << endl;
-        cout << "0. Iesire Program" << endl;
-        cout << "==========================================================" << endl;
-        cout << "Alege categoria: ";
-        cin >> optiune;
-
-        switch (optiune)
+        int opt;
+        do
         {
-        case 1:
-            meniuAngajati(manager);
-            break;
-        case 2:
-            meniuElectrocasnice(manager);
-            break;
-        case 3:
-            meniuProcesare(manager, TIC);
-            break;
-        case 4:
-            meniuRapoarte(manager);
-            break;
-        case 0:
-            cout << "Inchidere program..." << endl;
-            break;
-        default:
-            cout << "Optiune invalida!" << endl;
-        }
-    } while (optiune != 0);
+            cout << "\n--- PROCESARE CERERI ---" << endl;
+            cout << "1. Incarca cereri din fisier\n2. Adauga cerere manual\n";
+            cout << "3. START Simulare Completa (Loop automat)\n4. Ruleaza 1 TIC\n0. Revenire\nAlegeti: ";
+            cin >> opt;
+            switch (opt)
+            {
+            case 1:
+                manager.cereri().incarcaDinFisier("tests/set5/cereri_5.csv");
+                break;
+            case 2:
+                manager.cereri().adaugaManual();
+                break;
+            case 3:
+                if (!manager.angajati().echipaCompleta())
+                    break;
+                while (!manager.cereriInSistem())
+                {
+                    cout << "\n--- TIC " << TIC << " ---" << endl;
+                    manager.updateSimulare();
+                    TIC++;
+                }
+                break;
+            case 4:
+                if (manager.angajati().echipaCompleta())
+                {
+                    manager.updateSimulare();
+                    TIC++;
+                }
+                break;
+            }
+        } while (opt != 0);
+    }
 
-    return 0;
-}
+    int main()
+    {
+        ServiceManager &manager = ServiceManager::getInstance();
+        int TIC = 1;
+        int optiune;
+
+        do
+        {
+            cout << "\n========== SERVICE ELECTRONICE - MENU PRINCIPAL ==========" << endl;
+            cout << "1. Gestiune Angajati" << endl;
+            cout << "2. Gestiune Electrocasnice" << endl;
+            cout << "3. Procesare Cereri & Simulare" << endl;
+            cout << "4. Rapoarte" << endl;
+            cout << "0. Iesire Program" << endl;
+            cout << "==========================================================" << endl;
+            cout << "Alege categoria: ";
+            cin >> optiune;
+
+            switch (optiune)
+            {
+            case 1:
+                meniuAngajati(manager);
+                break;
+            case 2:
+                meniuElectrocasnice(manager);
+                break;
+            case 3:
+                meniuProcesare(manager, TIC);
+                break;
+            case 4:
+                meniuRapoarte(manager);
+                break;
+            case 0:
+                cout << "Inchidere program..." << endl;
+                break;
+            default:
+                cout << "Optiune invalida!" << endl;
+            }
+        } while (optiune != 0);
+
+        return 0;
+    }
