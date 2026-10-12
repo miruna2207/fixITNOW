@@ -17,6 +17,7 @@ private:
     int durata_reparatie;
     int timp_ramas;
     double pret_reparatie;
+    time_t timp_inregistrare;
     Tehnician* tehnician_alocat = nullptr;
     static int nextID;
 
@@ -30,7 +31,7 @@ public:
 
     
     CerereReparatie(CerereReparatie&&) = default;
-
+    void add_timp_reparatie();
     int getID() const;
     string get_nume_client() const { return numeClient; }
     int get_timp_ramas() const;

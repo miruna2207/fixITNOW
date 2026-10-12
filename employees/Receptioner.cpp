@@ -30,7 +30,7 @@ void Receptioner::inregistreazaCerere(std::unique_ptr<CerereReparatie> cr) {
     if (!cr) return; 
 
     id_cereri_gestionate.push_back(cr->getID());
-
+    cr->add_timp_reparatie();
 
     ServiceManager::getInstance().proceseazaCerereNoua(std::move(cr));
 }

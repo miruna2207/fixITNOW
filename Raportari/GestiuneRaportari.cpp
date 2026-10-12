@@ -119,7 +119,7 @@ void GestiuneRaportari::raportTopSalariuAngajati(const vector<unique_ptr<Angajat
         for (int i = 0; i < limita; i++)
         {
             lista[i]->afiseaza(file);
-            file << " ," << lista[i]->get_Salariu() << " RON" << endl;
+            file << " ," << lista[i]->get_Salariu() << " ,RON" << endl;
         }
         file.close();
         std::cout << "Raportul a fost salvat cu succes in fisier!\n ";
@@ -164,7 +164,7 @@ void GestiuneRaportari::Angajat_Longest_Reparatie(const vector<unique_ptr<Cerere
         }
 
         t->afiseaza(file);
-        file << "," << t->get_Salariu() << "," << best_reparatie;
+        file << " ," << t->get_Salariu() << " ," << best_reparatie;
         file.close();
         std::cout << "Raportul a fost salvat cu succes in fisier!\n";
     }
@@ -180,7 +180,7 @@ void GestiuneRaportari::raportAparateRespinse(const vector<unique_ptr<CerereRepa
 {
     if (respinse.empty())
     {
-        std::cout << "Nu exista aparate respinse in sistem." << endl;
+        throw runtime_error( "Nu exista aparate respinse in sistem.");
         return;
     }
 

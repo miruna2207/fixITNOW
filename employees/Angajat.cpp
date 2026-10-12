@@ -181,7 +181,7 @@ void Angajat::verify_angajat() const
     verify_data_angajare(data_angajare);
 };
   
-    void Angajat::afiseaza(ostream& file) const{
+void Angajat::afiseaza(ostream& file) const{
         file<<get_tip()<<" ,"<<nume<<" ,"<<prenume<<" ,"<<CNP<<" ,"<<id<<" ,"<<data_angajare<<" ,"<<oras_domiciliu;
     };
 

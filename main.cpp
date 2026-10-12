@@ -18,7 +18,9 @@ void meniuAngajati(ServiceManager &manager)
         switch (opt)
         {
         case 1:
-            manager.angajati().incarcaDinFisier("tests/set5/angajati_5.csv");
+            manager.angajati().incarcaDinFisier("tests/set7/angajati_7.csv");
+           //manager.angajati().incarcaDinFisier("tests/verifica_angajati/angajati_rau.csv");
+            
             break;
         case 2:
             cout << "CNP: ";
@@ -70,7 +72,9 @@ void meniuElectrocasnice(ServiceManager &manager)
         {
         case 1:
         {
-            manager.electrocasnice().incarcaModeleDinFisier("tests/set5/catalog_5.csv");
+            // manager.electrocasnice().incarcaModeleDinFisier("tests/verifica_electrocasnice/catalog_rau_2.csv");
+
+            manager.electrocasnice().incarcaModeleDinFisier("tests/set7/catalog_7.csv");
             break;
         }
         case 2:
@@ -92,11 +96,22 @@ void meniuElectrocasnice(ServiceManager &manager)
         }
         case 4:
         {
-            for (auto &c : manager.getFinalizate())
-            {
-                c->get_aparat()->afiseaza(cout);
-                cout << endl;
+            try{
+                if(manager.getFinalizate().empty())
+                    throw runtime_error("nu exista nicio cerere finalizata in sistem!");
+                else{
+                    cout<<"\n\n ========Aparate finalizate ============";
+                    for (auto &c : manager.getFinalizate())
+                    {
+                        c->get_aparat()->afiseaza(cout);
+                        cout << endl;
+                    }
+                    cout<<"\n\n =======================================\n\n";
+                }
+            }catch(const exception& e){
+                cout<<"\n\n"<<e.what()<<"\n\n";
             }
+            
             break;
         }
         case 5:
@@ -105,8 +120,10 @@ void meniuElectrocasnice(ServiceManager &manager)
             break;
         }
         case 6:
-        {
+        try {
             manager.raport().raportAparateRespinse(manager.getRejectate());
+        }catch(const exception& e){
+            cout<<"\n\n"<<e.what()<<"\n\n";
         }
         }
     } while (opt != 0);
@@ -181,7 +198,8 @@ void meniuRapoarte(ServiceManager &manager)
             switch (opt)
             {
             case 1:
-                manager.cereri().incarcaDinFisier("tests/set5/cereri_5.csv");
+             //manager.cereri().incarcaDinFisier("tests/verifica_cereri/cereri_rele_1.csv");
+                manager.cereri().incarcaDinFisier("tests/set7/cereri_7.csv");
                 break;
             case 2:
                 manager.cereri().adaugaManual();
@@ -215,7 +233,7 @@ void meniuRapoarte(ServiceManager &manager)
 
         do
         {
-            cout << "\n========== SERVICE ELECTRONICE - MENU PRINCIPAL ==========" << endl;
+            cout << "\n========== SERVICE ELECTRONICE - MENIU PRINCIPAL ==========" << endl;
             cout << "1. Gestiune Angajati" << endl;
             cout << "2. Gestiune Electrocasnice" << endl;
             cout << "3. Procesare Cereri & Simulare" << endl;

@@ -2,6 +2,10 @@
 #include "../GestiuneElectrocasnice/GestiuneElectrocasnice.h"
 int CerereReparatie::nextID = 1;
 
+void CerereReparatie::add_timp_reparatie(){
+     timp_inregistrare = time(nullptr);
+};
+
 CerereReparatie::CerereReparatie(unique_ptr<Electrocasnic> e, const string nume, int comp) :
     cerereID(nextID++), aparat(std::move(e)), numeClient(nume), complexitate(comp) {
     

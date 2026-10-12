@@ -169,7 +169,7 @@ Tehnician *CelMaiBunTehnician(const string tip, const string marca,
                               const vector<unique_ptr<Angajat>> &lista)
 {
     Tehnician *ales = nullptr;
-    int minim_timp = -1;
+    int minim_timp = 100;
     for (auto a = lista.begin(); a != lista.end(); a++)
     {
         if ((*a)->get_tip() == "Tehnician")

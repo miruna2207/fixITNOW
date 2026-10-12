@@ -1,0 +1,14 @@
+# Artefacte de compilare
+*.o
+*.obj
+*.exe
+service.exe
+
+# Directoare generate la rulare
+output/
+
+# Setări specifice mediului de dezvoltare (IDE)
+.vscode/
+.idea/
+*.suo
+*.user
