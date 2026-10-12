@@ -12,6 +12,7 @@ This system simulates an electronic appliance repair service where:
 
 ##  Project Structure
 
+```text
 project/
 ├── main.cpp # Main program with menu interface
 ├── employees/ # Employee-related classes
@@ -23,6 +24,7 @@ project/
 ├── tests/ # Test data sets
 ├── output/ # Generated CSV reports (created at runtime)
 └── Makefile # Build configuration
+```
 
 #  Features
 
